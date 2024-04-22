@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+
+.titulo {
+    display: block;
+    padding: 12px;
+}
+
+.titulo h1 {
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+legend {
+    font-size: 1.3rem;
+    display: block;
+    padding: 12px;
+    background-color: white;
+    border-top: 3px solid rgb(194, 27, 27);
+}
+
+table {
+    max-width: 100%;
+    background-color: white;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+table tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.041);
+    transition: .2s;
+}
+
+
+table tbody tr:hover {
+    background-color: rgba(218, 238, 250, 0.322);
+    padding: 5px;
+}
+
+table td {
+    padding: 5px 10px;
+    font-size: 1rem;
+    text-wrap: nowrap;
+}
+
+table td strong {
+    font-size: 1.1rem;
+    color: rgb(23, 135, 240);
+    font-weight: 400;
+}
+
+table .status i {
+    font-size: 20px;
+}
+
+
+td, th {
+    width: max-content;
+    padding: 5px 30px;
+    cursor: pointer;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    gap: 5px;
+}
+
+.status i {
+    color: rgba(0, 0, 0, 0.226);
+}
+
+
+.tl {
+    text-align: left !important;
+}
+
+.tr {
+    text-align: right !important;
+}
+
+.tc {
+    text-align: center !important;
+}
+
+.ck {
+    color: limegreen !important;
+}
+
+.btn-abrir {
+    padding: 10px 15px;
+    background-color: rgb(233, 233, 233);
+    border-radius: 5px;
+}
+
+.wl {
+    width: 100%;
+}

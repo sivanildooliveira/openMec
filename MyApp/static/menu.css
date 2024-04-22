@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+
+header {
+    position: fixed;
+    top: 46px;
+    left: 0px;
+    display: block;
+    width: 60px;
+    height: calc(100vh - 47px);
+    margin-top: 3px;
+    background-color: rgb(245, 245, 245);
+    transition: .4s;
+    visibility: visible;
+    overflow-x: hidden;
+    z-index: 100;
+}
+
+header:hover {
+    width: 176px;
+    border-right: 1px solid rgb(165, 165, 165);
+}
+
+#menuPrincipal {
+    display: block;
+}
+
+#menuPrincipal a {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    gap: 20px;
+    font-size: 14px;
+    border-bottom: 1px solid rgb(228, 228, 228);
+}
+
+#menuPrincipal i {
+    font-size: 20px;
+}
+
+#menuPrincipal a:hover {
+    background-color: white;
+}

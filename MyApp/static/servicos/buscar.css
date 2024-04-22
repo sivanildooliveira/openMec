@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+
+legend {
+    font-size: 22px;
+    padding: 5px 0px;
+}
+
+table {
+    width: 100%;
+}
+
+table thead {
+    position: sticky;
+    top: 80px;
+    background-color: white;
+    padding: 10px 0px;
+}
+
+table thead th{
+    padding: 5px 0px;
+}
+
+table tbody tr {
+    transition: .2s;
+}
+
+
+table tbody tr:hover {
+    background-color: rgb(191, 224, 243);
+    padding: 5px;
+}
+
+table td {
+    padding: 5px;
+}
+
+table .status i {
+    font-size: 20px;
+}
+
+
+td, th {
+    width: max-content;
+    padding: 15px 30px;
+    cursor: pointer;
+}
+
+.status i {
+    color: rgba(0, 0, 0, 0.226);
+}
+
+
+.tl {
+    text-align: left;
+}
+
+.tr {
+    text-align: right;
+}
+
+.tc {
+    text-align: center;
+}
+
+.ck {
+    color: limegreen !important;
+}

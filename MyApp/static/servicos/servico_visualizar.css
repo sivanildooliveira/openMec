@@ -1,0 +1,143 @@
+@charset "UTF-8";
+
+.titulo {
+    display: flex;
+    padding: 12px;
+}
+
+.titulo h1 {
+    display: flex;
+    align-items: baseline;
+    font-size: 1.5rem;
+    font-weight: 400;
+    gap: 15px;
+}
+
+#status {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0px;
+}
+
+#status ul {
+    display: flex;
+    width: 90%;
+    max-width: 1000px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#status ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.custom-checkbox {
+    display: none;
+}
+
+
+.checkbox-label {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.custom-checkbox:checked + .checkbox-label {
+    background-color: #00cc00; /* cor quando marcado */
+}
+
+.checkbox-label::after {
+    content: 'OK';
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: bolder;
+    color: white;
+    opacity: 0;
+}
+
+.custom-checkbox:checked + .checkbox-label::after {
+    opacity: 1;
+}
+
+
+#status input[type=datetime-local] {
+    background-color: transparent;
+    outline: none;
+    font-weight: 600;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.582);
+    border: none;
+}
+
+
+#info-cliente {
+    display: flex;
+    align-items: start;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: auto;
+    padding: 10px;
+    border: 3px dashed white;
+    border-radius: 5px;
+    font-size: 1rem;
+    gap: 10px 30px;
+}
+
+#info-cliente strong {
+    font-size: .9rem;
+}
+
+#info-cliente span {
+    font-size: 1rem !important;
+}
+
+#info-cliente > div {
+    display: flex;
+    min-width: 150px;
+    flex-direction: column;
+    justify-content: start;
+    gap: 5px;
+}
+
+
+#info-os {
+    display: flex;
+    align-items: start;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: auto;
+    padding: 10px;
+    gap: 10px 30px;
+}
+
+#info-os > div {
+    display: flex;
+    min-width: 150px;
+    flex-direction: column;
+    justify-content: start;
+    gap: 5px;
+}
+
+#info-os input:disabled {
+    padding: 5px;
+    text-align: center;
+
+}

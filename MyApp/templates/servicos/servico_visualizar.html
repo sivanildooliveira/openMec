@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='servicos/servico_visualizar.css') }}">
+{% endblock %}
+
+
+{% block header %}
+{% include 'servicos/header.html' %}
+
+<script>
+    var requestStatus = (std)=>{
+        
+        var idFor = std.getAttribute('idFor')
+        var valor = std.getAttribute('valor')
+
+        var data = {'status': valor, 'id': idFor}
+        var url1 = "{{ url_for('att_status') }}"
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+
+        fetch(url1, options)
+            .then(response => response.json())
+            .then(data => {
+                if(data['status'] == 'ok'){
+                    alert("status atualizado!")
+                    window.location.reload()
+                }else{
+                    alert(data['status'])
+                }
+            })
+            .catch(error => {
+                alert(error)
+                return error
+            });
+
+    }
+    
+</script>
+
+
+{% endblock %}
+
+{% block main %}
+
+<div class="titulo">
+    <h1>Serviços <legend>Visualizar</legend></h1> 
+</div>
+
+<section>
+    <article id="status">
+        <ul>
+            <li>
+                <label for="entrada">Entrada</label>
+                <input type="checkbox" id="entrada" class="custom-checkbox" checked>
+                <label for="entrada" class="checkbox-label"></label>
+                <input type="datetime-local" name="dentrada" id="dentrada" value="{{serv.data_formatada()}}" style="text-align: center;">
+            </li>
+            <li>
+                <label for="autorizado">Autorizado</label>
+                <input type="checkbox" id="autorizado" class="custom-checkbox" idFor="{{ serv.id }}" valor=2 onchange="requestStatus(this)" {{ 'checked' if serv.status >= 2 else '' }}>
+                <label for="autorizado" class="checkbox-label"></label>
+                <input type="datetime-local" name="dautorizado" id="dautorizado" style="text-align: center;">
+            </li>
+            <li>
+                <label for="finalizado">Finalizado</label>
+                <input type="checkbox" id="finalizado" class="custom-checkbox" idFor="{{ serv.id }}" valor=3 onchange="requestStatus(this)" {{ 'checked' if serv.status >= 3 else '' }}>
+                <label for="finalizado" class="checkbox-label"></label>
+                <input type="datetime-local" name="dfinalizado" id="dfinalizado" style="text-align: center;">
+            </li>
+            <li>
+                <label for="retirado">Retirado</label>
+                <input type="checkbox" id="retirado" class="custom-checkbox" idFor="{{ serv.id }}" valor=4 onchange="requestStatus(this)" {{ 'checked' if serv.status >= 4 else '' }}>
+                <label for="retirado" class="checkbox-label"></label>
+                <input type="datetime-local" name="dretirado" id="dretirado" style="text-align: center;">
+            </li>
+        </ul>
+    
+    </article>
+</section>
+
+<section>
+
+    <article id="info-cliente">
+
+        <div style="min-width: 400px;">
+            <strong>Cliente</strong>
+            <span style="color: rgb(23, 135, 240); font-weight: 400; font-size: 1.2rem !important;"> <i class="bi bi-arrow-up-right-square-fill"></i> {{ serv.cliente }}</span>
+        </div>
+
+        <div>
+            <strong>telefone</strong>
+            <span>{{ serv.cliente }}</span>
+        </div>
+
+        <div>
+            <strong>Celular</strong>
+            <span>{{ serv.cliente }}</span>
+        </div>
+
+        <div style="min-width: 50%;">
+            <strong>Cpf/Cnpj</strong>
+            <span>{{ serv.cliente }}</span>
+        </div>
+
+        <div style="min-width: 40%;">
+            <strong>Email</strong>
+            <span>{{ serv.cliente }}</span>
+        </div>
+
+        <div>
+            <strong style="min-width: 100%;">Endereço</strong>
+            <span>{{ serv.cliente }}</span>
+        </div>
+    </article>
+    <br>
+
+    <article id="info-os">
+
+        <div>
+            <strong>Nª Serviço</strong>
+            <input type="text" value="{{ serv.os }}" disabled>
+        </div>
+
+        <div>
+            <strong>Veiculo</strong>
+            <div style="background-color: rgb(223, 223, 223); padding-left: 5px;">
+                <i class="bi bi-car-front-fill" style="padding: 0px 10px;"></i>
+                <input style="width: 500px; text-align: left;" type="text" id="veiculo" name="veiculo" value="{{ serv.placa }} - {{ serv.fabricante }} - {{ serv.modelo }} - {{ serv.cor }} " disabled>
+            </div>
+        </div>
+
+    </article>
+
+    <article>
+        {% include 'servicos/components/servico.html' %}
+    </article>
+</section>
+
+
+
+    
+
+
+{% endblock %}
