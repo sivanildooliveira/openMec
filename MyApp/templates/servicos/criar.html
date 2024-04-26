@@ -15,9 +15,9 @@
 <legend><strong>Serviços</strong> Criar Novo Serviço</legend>
 
 <script>
-    tt.addEventListener('change', (p)=>{
-        alert(p.checked)
-    })
+    //tt.addEventListener('change', (p)=>{
+    //    alert(p.checked)
+    //})
 </script>
 
 <section>
@@ -86,12 +86,16 @@
                     {{ form.cliente(style='width: 50vw') }}
                 </div>
             </div>
-            {{ form.submit() }}
+            <div>
+                {{ form.submit(class='btnSalvar') }}
+                <button class="btnCancelar">Cancelar</button>
+            </div>
         </form>
     </article>
 </section>
 
 {% endblock %}
+
 
 {% block scripts %}
 <script>

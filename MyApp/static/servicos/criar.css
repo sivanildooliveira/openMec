@@ -123,3 +123,24 @@ legend strong {
     outline: .3px solid rgb(92, 191, 248) !important;
     box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.24);
 }
+
+
+.btnSalvar, .btnCancelar {
+    background-color: rgb(25, 52, 126);
+    padding: 10px 40px;
+    color: white;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: .8;
+}
+
+.btnCancelar {
+    background-color: rgb(194, 40, 40);
+    padding: 10px 30px;
+}
+
+.btnSalvar:hover, .btnCancelar:hover {
+    opacity: 1;
+}
