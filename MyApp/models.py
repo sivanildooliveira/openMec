@@ -40,6 +40,8 @@ class MaoDeObra(database.Model):
     responsavel = Column(String)
     porcent_comissao = Column(Float, default=0.0)
 
+    pecas = database.relationship('Pecas', backref='servico', lazy=True)
+
 
 with app.app_context():
     database.create_all()
