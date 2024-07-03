@@ -1,6 +1,6 @@
 from flask import render_template, url_for, request
 from MyApp import app, database
-from MyApp.models import Servico, MaoDeObra
+from MyApp.models import Servico, Maodeobra, Peca
 from MyApp.form import FormOs
 from MyApp.defs_aux import *
 import json
@@ -19,6 +19,9 @@ def servicos():
 
 @app.route('/servicos/buscar')
 def servicos_buscar():
+
+    pecas = Peca.query.all()
+    mao_de_obra = Maodeobra.query.all()
 
     return render_template('servicos/buscar.html')
 
