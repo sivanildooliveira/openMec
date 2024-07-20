@@ -1,0 +1,78 @@
+
+
+<section>
+    <article id="status">
+        <ul>
+            <li>
+                <label for="entrada">Entrada</label>
+                <input type="checkbox" id="entrada" class="custom-checkbox" checked>
+                <label for="entrada" class="checkbox-label"></label>
+                <input type="datetime-local" name="dentrada" id="dentrada" value="{{serv.data_formatada()}}" style="text-align: center;">
+            </li>
+            <li>
+                <label for="autorizado">Autorizado</label>
+                <input type="checkbox" id="autorizado" class="custom-checkbox" idFor="{{ serv.id }}" valor=2 onchange="requestStatus(this)">
+                <label for="autorizado" class="checkbox-label"></label>
+                <input type="datetime-local" name="dautorizado" id="dautorizado" style="text-align: center;">
+            </li>
+            <li>
+                <label for="finalizado">Finalizado</label>
+                <input type="checkbox" id="finalizado" class="custom-checkbox" idFor="{{ serv.id }}" valor=3 onchange="requestStatus(this)">
+                <label for="finalizado" class="checkbox-label"></label>
+                <input type="datetime-local" name="dfinalizado" id="dfinalizado" style="text-align: center;">
+            </li>
+            <li>
+                <label for="retirado">Retirado</label>
+                <input type="checkbox" id="retirado" class="custom-checkbox" idFor="{{ serv.id }}" valor=4 onchange="requestStatus(this)">
+                <label for="retirado" class="checkbox-label"></label>
+                <input type="datetime-local" name="dretirado" id="dretirado" style="text-align: center;">
+            </li>
+        </ul>
+    </article>
+    <script>
+        attStatus = ()=>{
+            document.querySelectorAll('#status input[type=checkbox]').forEach((cbx, i)=>{
+                cbx.setAttribute('checked')
+                if(i+1 <= servStatus){
+                    cbx.setAttribute('checked')
+                } 
+            })
+        }
+        attStatus()
+
+        var requestStatus = (std)=>{
+            var idFor = std.getAttribute('idFor')
+            var valor = std.getAttribute('valor')
+    
+            var data = {'status': valor, 'id': idFor}
+            var url1 = "{{ url_for('att_status') }}"
+    
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            };
+    
+            fetch(url1, options)
+                .then(response => response.json())
+                .then(data => {
+                    if(data['status'] == 'ok'){
+                        alert("status atualizado!")
+                        servStatus = valor
+                        attStatus()
+                    }else{
+                        alert(data['status'])
+                    }
+                })
+                .catch(error => {
+                    alert(error)
+                    return error
+                });
+    
+        }
+        
+    </script>
+</section>
+

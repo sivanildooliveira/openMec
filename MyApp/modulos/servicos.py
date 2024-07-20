@@ -31,7 +31,7 @@ def servico_visualizar(id):
     servico = Servico.query.filter_by(id=id).first()
     servicos = servico.servicos
 
-    print(servicos)
+    print(servico.status)
     
     return render_template('servicos/servico_visualizar.html', serv=servico)
 
@@ -67,7 +67,6 @@ def att_serv():
     print(data)
 
     return json.dumps({})
-
 
 
 @app.route('/servicos/api/status', methods=['POST'])
