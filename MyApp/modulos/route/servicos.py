@@ -1,43 +1,63 @@
 from flask import render_template, url_for, request
-from MyApp import app, database
-from MyApp.models import Servico, Maodeobra, Peca
+from MyApp import app, database, informacoes
+from MyApp.modulos.database.servisos_models import Servico, Maodeobra, Peca
 from MyApp.form import FormOs
 from MyApp.defs_aux import *
 import json
 
 
-
-
-
-
 @app.route('/')
-def servicos():
+def servicos_visao():
+    informacoes['modulo'] = 'servicos'
+    informacoes['menu'] = 'visao'
+
+    lista = Servico.query.all()
+    print(informacoes)
+    return render_template('modulos/servicos/visao.html', informacoes=informacoes, lista=lista)
+
+
+
+@app.route('/servicos/novidades')
+def servicos_novidades():
+    global informacoes
+    informacoes['menu'] = 'novidades'
+
     lista = Servico.query.all()
 
-    return render_template('servicos/novidades.html', lista=lista)
+    return render_template('modulos/servicos/novidades.html', informacoes=informacoes, lista=lista)
 
 
 @app.route('/servicos/buscar')
 def servicos_buscar():
+    global informacoes
+    informacoes['menu'] = 'buscar'
 
     pecas = Peca.query.all()
     mao_de_obra = Maodeobra.query.all()
 
-    return render_template('servicos/buscar.html')
+    return render_template('modulos/servicos/buscar.html', informacoes=informacoes)
 
 
 @app.route('/servicos/<id>')
 def servico_visualizar(id):
+    global informacoes
+    informacoes['menu'] = 'visualizar'
+    if id != 'idserv':
+        informacoes['id_os'] = id
+    else:
+        id = informacoes['id_os']
+
     servico = Servico.query.filter_by(id=id).first()
     servicos = servico.servicos
-
     print(servico.status)
     
-    return render_template('servicos/servico_visualizar.html', serv=servico)
+    return render_template('modulos/servicos/servico_visualizar.html', informacoes=informacoes, serv=servico)
 
 
 @app.route('/servicos/criar', methods=['GET','POST'])
 def servicos_criar():
+    global informacoes
+    informacoes['menu'] = 'criar'
 
     data_hora = data_formatada()
     form = FormOs()
@@ -57,7 +77,7 @@ def servicos_criar():
         database.session.add(n)
         database.session.commit()
 
-    return render_template('servicos/criar.html', form=form, data_hora=data_hora)
+    return render_template('modulos/servicos/criar.html', informacoes=informacoes, form=form, data_hora=data_hora)
 
 
 @app.route('/servicos/api/attserv', methods=['POST'])

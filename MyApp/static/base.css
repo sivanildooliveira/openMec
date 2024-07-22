@@ -22,3 +22,7 @@ main {
     padding-left: 63px;
 }
 
+main > section {
+    padding: 10px !important;
+}
+

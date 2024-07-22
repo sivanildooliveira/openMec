@@ -1,12 +1,98 @@
+
+
 <nav>
     <img src="{{ url_for('static', filename='images/logo.png') }}" alt="open mec">
-    <ul id="listNav">
-        <li><a href=""><i class="bi bi-clipboard-data"></i>GERENCIA</a></li>
-        <li><a href=""><i class="bi bi-tools"></i>SERVIÇOS</a></li>
-        <li><a href=""><i class="bi bi-cart3"></i>VENDAS</a></li>
-        <li><a href=""><i class="bi bi-person-heart"></i>CLIENTES</a></li>
-        <li><a href=""><i class="bi bi-box-seam"></i>ESTOQUE</a></li>
-        <li><a href=""><i class="bi bi-person-badge-fill"></i>RH</a></li>
-        <li><a href=""><i class="bi bi-currency-dollar"></i>FINANCEIRO</a></li>
-    </ul>
+    <div class="div-nav">
+        <ul id="listNav">
+            <li>
+                <a href="{{ url_for('gerencia_visao') }}" class="{{ 'active' if informacoes['modulo'] == 'gerencia' else '' }}">
+                    <img src="{{ url_for('static', filename='icons/planning.svg') }}" alt="">
+                    GERÊNCIA
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('servicos_visao') }}" class="{{ 'active' if informacoes['modulo'] == 'servicos' else '' }}">
+                    <img src="{{ url_for('static', filename='icons/customer-support.svg') }}" alt="">
+                    SERVIÇOS
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <img src="{{ url_for('static', filename='icons/shopping-cart.svg') }}" alt="">
+                    VENDAS
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <img src="{{ url_for('static', filename='icons/rating.svg') }}" alt="">
+                    CLIENTES
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <img src="{{ url_for('static', filename='icons/boxes.svg') }}" alt="">
+                    ESTOQUE
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <img src="{{ url_for('static', filename='icons/employee.svg') }}" alt="">
+                    RH
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <img src="{{ url_for('static', filename='icons/stats.svg') }}" alt="">
+                    FINANCEIRO
+                </a>
+            </li>
+        </ul>
+
+        <ul id="infoNav">
+            <li>
+                <img src="{{ url_for('static', filename='icons/notifications.svg') }}" alt="">
+                
+            </li>
+            <li onclick="openCongUser()">
+                <img id="imgUser" src="{{ url_for('static', filename='icons/user.svg') }}" alt="">
+                <img style="width: 13px; opacity: .6;" src="{{ url_for('static', filename='icons/down-arrow.svg') }}" alt="">
+            </li>
+        </ul>
+    </div>
+
+    <div id="configuracaoDeUsuario">
+        <div class="informacoes-user">
+            <img src="{{ url_for('static', filename='icons/user.svg') }}" alt="">
+            <legend>Usuário Ativo no Momento</legend>
+        </div>
+        <div class="opcoes-user">
+            <ul>
+                <li>
+                    <a href="">
+                        <img src="{{ url_for('static', filename='icons/people.svg') }}" alt="">
+                        CONFIGURAÇÕES DO USUÁRIO
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="{{ url_for('static', filename='icons/gear.svg') }}" alt="">
+                        CONFIGURAÇÕES DO SISTEMA
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="{{ url_for('static', filename='icons/logout.svg') }}" alt="">
+                        SAIR
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+
+        const menuUser = document.getElementById('configuracaoDeUsuario')
+        var openCongUser = ()=>{
+            menuUser.classList.toggle('active')
+        }
+    </script>
 </nav>

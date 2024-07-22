@@ -13,6 +13,12 @@ database.init_app(app)
 
 migrate = Migrate(app, database)
 
+informacoes = {
+    'modulo': None,
+    'menu': None,
+    'id_os': None
+}
+
 
 from MyApp import route
 

@@ -1,0 +1,119 @@
+@charset "UTF-8";
+
+
+.titulo {
+    display: block;
+    padding-bottom: 12px;
+    margin-top: -5px;
+}
+
+.titulo h1 {
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+article > legend {
+    font-size: 1.3rem;
+    display: block;
+    padding: 12px;
+    background-color: white;
+    border-top: 3px solid rgb(27, 80, 194);
+    border-radius: 5px 5px 0px 0px;
+}
+
+table {
+    max-width: 100%;
+    background-color: white;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+table thead {
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.144);
+}
+
+table thead th {
+    text-align: left;
+    width: max-content;
+    padding: 5px 40px;
+}
+
+table tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.041);
+    transition: .2s;
+}
+
+
+table tbody tr:hover {
+    background-color: rgba(218, 238, 250, 0.322);
+    padding: 5px;
+}
+
+table td {
+    padding: 5px 10px;
+    font-size: .9rem;
+    text-wrap: nowrap;
+    padding: 0px 40px;
+}
+
+table td strong {
+    font-size: 1rem;
+    color: rgb(20, 126, 224);
+    font-weight: 400;
+}
+
+table td small {
+    font-size: .9rem;
+    color: rgb(20, 126, 224);
+    font-weight: 400;
+}
+
+table .status i {
+    font-size: 20px;
+}
+
+
+td {
+    width: max-content;
+    padding: 5px 30px;
+    cursor: pointer;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    gap: 5px;
+}
+
+.status i {
+    color: rgba(0, 0, 0, 0.226);
+}
+
+
+.tl {
+    text-align: left !important;
+}
+
+.tr {
+    text-align: right !important;
+}
+
+.tc {
+    text-align: center !important;
+}
+
+.ck {
+    color: limegreen !important;
+}
+
+.btn-abrir {
+    padding: 10px 15px;
+    background-color: rgb(233, 233, 233);
+    border-radius: 5px;
+}
+
+.wl {
+    width: 100%;
+}

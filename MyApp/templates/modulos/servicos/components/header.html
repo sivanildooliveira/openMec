@@ -1,0 +1,34 @@
+<header>
+    <ul id="menuPrincipal">
+        <li>
+            <a href="{{ url_for('servicos_visao') }}" class="{{ 'active' if informacoes['menu'] == 'visao' else '' }}">
+                <img src="{{ url_for('static', filename='icons/analysis.svg') }}" alt=""> 
+                RESUMO 
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('servicos_novidades') }}" class="{{ 'active' if informacoes['menu'] == 'novidades' else '' }}">
+                <img src="{{ url_for('static', filename='icons/star.svg') }}" alt=""> 
+                NOVIDADES 
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('servicos_buscar') }}" class="{{ 'active' if informacoes['menu'] == 'buscar' else '' }}">
+                <img src="{{ url_for('static', filename='icons/loupe.svg') }}" alt=""> 
+                BUSCAR 
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('servico_visualizar', id='idserv') }}" class="{{ 'active' if informacoes['menu'] == 'visualizar' else '' }}">
+                <img src="{{ url_for('static', filename='icons/vision.png') }}" alt=""> 
+                VISUALIZAR
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('servicos_criar') }}" class="{{ 'active' if informacoes['menu'] == 'criar' else '' }}">
+                <img src="{{ url_for('static', filename='icons/add.svg') }}" alt="">
+                CRIAR
+            </a>
+        </li>
+    </ul>
+</header>

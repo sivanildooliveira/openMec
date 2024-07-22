@@ -1,0 +1,10 @@
+<header>
+    <ul id="menuPrincipal">
+        <li>
+            <a href="{{ url_for('gerencia_visao') }}" class="{{ 'active' if informacoes['menu'] == 'visao' else '' }}">
+                <img src="{{ url_for('static', filename='icons/web-development.svg') }}" alt=""> 
+                VISÃO 
+            </a>
+        </li>
+    </ul>
+</header>

@@ -2,8 +2,8 @@
 
 
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='servicos/servico_visualizar.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='servicos/components/status.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='modulos/servicos/servico_visualizar.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='modulos/servicos/components/status.css') }}">
 <script>
     var servStatus = parseInt('{{ serv.status }}')
 </script>
@@ -11,9 +11,7 @@
 
 
 {% block header %}
-
-{% include 'servicos/header.html' %}
-
+{% include 'modulos/servicos/components/header.html' %}
 {% endblock %}
 
 {% block main %}
@@ -22,7 +20,7 @@
     <h1>Serviços <legend>Visualizar</legend></h1> 
 </div>
 
-{% include 'servicos/components/status.html' %}
+{% include 'modulos/servicos/components/status.html' %}
 
 <section>
 
@@ -78,7 +76,7 @@
     </article>
 
     <article>
-        {% include 'servicos/components/servico.html' %}
+        {% include 'modulos/servicos/components/servico.html' %}
     </article>
 </section>
 
@@ -91,6 +89,6 @@
 
 {% block footer %}
 
-    {% include 'servicos/components/footer_os.html' %}
+    {% include 'modulos/servicos/components/footer_os.html' %}
 
 {% endblock %}

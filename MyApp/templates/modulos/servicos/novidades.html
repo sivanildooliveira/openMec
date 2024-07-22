@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='modulos/servicos/novidades.css') }}">
+{% endblock %}
+
+
+{% block header %}
+{% include 'modulos/servicos/components/header.html' %}
+{% endblock %}
+
+{% block main %}
+
+<script>
+    var requestStatus = (std)=>{
+        
+        var idFor = std.getAttribute('idFor')
+        var valor = std.getAttribute('valor')
+
+        var data = {'status': valor, 'id': idFor}
+        var url1 = "{{ url_for('att_status') }}"
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+
+        fetch(url1, options)
+            .then(response => response.json())
+            .then(data => {
+                if(data['status'] == 'ok'){
+                    alert("status atualizado!")
+                    window.location.reload()
+                }else{
+                    alert(data['status'])
+                }
+            })
+            .catch(error => {
+                alert(error)
+                return error
+            });
+
+    }
+    
+</script>
+
+<section>
+    <div class="titulo">
+        <h1>Serviços</h1>
+    </div>
+
+    <article>
+        <table id="ativos">
+            <legend>Serviços em execução</legend>
+            <thead>
+                <tr>
+                    <th class="tc peq" style="width: 14px;">Código</th>
+                    <th class="tl">Cliente</th>
+                    <th class="tl">Contato</th>
+                    <th class="tl">Entrada</th>
+                    <th class="tc">Status</th>
+                    <th class="tc">Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in range(30) %}
+                {% for i in lista %}
+                    {% if i.status < 3 %}
+                    <tr>
+                        <td class="tc pec"><small><i class="bi bi-arrow-down-circle-fill"></i> {{i.os}}</small></td>
+                        <td class="tl wl"><strong>{{ i.cliente }}</strong> <br> {{ i.fabricante }}  {{ i.modelo }}</td>
+                        <td class="tl">(62) 99405-3879</td>
+                        <td class="tl" style="font-size: .9rem; text-wrap: nowrap;">{{ i.data_formatada() }} <br> sem previsão</td>
+                        <td class="tc status">
+                            <i class="bi bi-circle-fill {{ 'ck' if i.status >= 1 else ''}}" idFor="{{ i.id }}" valor=1 onclick="requestStatus(this)"></i>
+                            <i class="bi bi-circle-fill {{ 'ck' if i.status  >= 2 else ''}}" idFor="{{ i.id }}" valor=2 onclick="requestStatus(this)"></i>
+                            <i class="bi bi-circle-fill {{ 'ck' if i.status  >= 3 else ''}}" idFor="{{ i.id }}" valor=3 onclick="requestStatus(this)"></i>
+                            <i class="bi bi-circle-fill {{ 'ck' if i.status  == 4 else ''}}" idFor="{{ i.id }}" valor=4 onclick="requestStatus(this)"></i>
+                            <i class="bi bi-currency-dollar" style="font-size: 20px; margin-left: -3px; font-weight: 800;"></i>
+                        </td>
+                        <td class="tc"><a href="{{ url_for('servico_visualizar', id=i.id) }}" class="btn-abrir">Abrir</a></td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}{% endfor %}
+            </tbody>
+        </table>
+    </article>
+    
+    
+    
+    
+    <article>
+        <table id="finalizados">
+        
+            <legend>Serviços Finalizados</legend>
+        
+            <thead>
+                <tr>
+                    <th class="tc peq" style="width: 14px;">Código</th>
+                    <th class="tl">Cliente</th>
+                    <th class="tl">Contato</th>
+                    <th class="tl">Entrada</th>
+                    <th class="tc">Status</th>
+                    <th class="tc">Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in lista %}
+                    {% if i.status >= 3 %}
+                        <tr>
+                            <td class="tc pec"><strong><i class="bi bi-arrow-down-circle-fill"></i> {{i.os}}</strong></td>
+                            <td class="tl wl"><strong>{{ i.cliente }}</strong> <br> {{ i.fabricante }}  {{ i.modelo }}</td>
+                            <td class="tl">(62) 99405-3879</td>
+                            <td class="tl" style="font-size: .9rem; text-wrap: nowrap;">{{ i.data_formatada() }} <br> sem previsão</td>
+                            <td class="tc status">
+                                <i class="bi bi-circle-fill {{ 'ck' if i.status >= 1 else ''}}" idFor="{{ i.id }}" valor=1 onclick="requestStatus(this)"></i>
+                                <i class="bi bi-circle-fill {{ 'ck' if i.status  >= 2 else ''}}" idFor="{{ i.id }}" valor=2 onclick="requestStatus(this)"></i>
+                                <i class="bi bi-circle-fill {{ 'ck' if i.status  >= 3 else ''}}" idFor="{{ i.id }}" valor=3 onclick="requestStatus(this)"></i>
+                                <i class="bi bi-circle-fill {{ 'ck' if i.status  == 4 else ''}}" idFor="{{ i.id }}" valor=4 onclick="requestStatus(this)"></i>
+                                <i class="bi bi-currency-dollar" style="font-size: 20px; margin-left: -3px; font-weight: 800;"></i>
+                            </td>
+                            <td class="tc"><a href="{{ url_for('servico_visualizar', id=i.id) }}" class="btn-abrir">Abrir</a></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </article>
+</section>
+
+{% endblock %}

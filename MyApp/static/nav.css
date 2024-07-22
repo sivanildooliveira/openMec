@@ -8,11 +8,13 @@ nav {
     height: 45px;
     width: 100%;
     display: flex;
-    padding: 0px 10px;
+    padding: 0px 20px;
+    padding-right: 0px;
     align-items: center;
     justify-content: start;
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(250, 250, 250);
     z-index: 1000;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.151);
 }
 
 nav > img{
@@ -20,27 +22,110 @@ nav > img{
     height: 52%;
 }
 
-#listNav {
+nav .div-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0px 30px;
+}
+
+nav #listNav {
     display: flex;
     align-items: center;
     justify-content: start;
-    margin-left: 30px;
     padding: 5px;
 }
 
-#listNav a {
+nav #listNav a {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 50px;
     padding: 0px 20px;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 12px;
     transition: .2s;
     gap: 3px;
 }
 
-#listNav a:hover {
-    color: white;
-    background-color: rgb(131, 131, 131);
+nav #listNav a img {
+    width: 15px;
 }
+
+
+nav #listNav a.active {
+    background-color: #ECF0F5;
+}
+
+
+nav #listNav a:hover {
+    background-color: rgb(224, 224, 224);
+    transform: scale(1.1);
+}
+
+
+nav #infoNav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+nav #infoNav img {
+    width: 25px;
+    transition: .4s;
+    cursor: pointer;
+}
+
+nav #infoNav li:hover img {
+    transform: scale(1.2);
+}
+
+nav #configuracaoDeUsuario {
+    display: none;
+    position: absolute;
+    top: 45px;
+    right: 0px;
+    width: 250px;
+    height: max-content;
+    background-color: white;
+    border: 1px solid rgb(214, 214, 214);
+}
+
+nav #configuracaoDeUsuario.active {
+    display: block;
+}
+
+nav #configuracaoDeUsuario .informacoes-user {
+    background-color: rgb(61, 61, 61);
+    color: white;
+    text-align: center;
+    padding: 20px 0px;
+}
+
+nav #configuracaoDeUsuario .informacoes-user img {
+    width: 25%;
+}
+
+nav #configuracaoDeUsuario .informacoes-user legend {
+    font-size: 15px;
+}
+
+nav #configuracaoDeUsuario .opcoes-user a {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 12px;
+    opacity: .7;
+    gap: 5px;
+}
+
+nav #configuracaoDeUsuario .opcoes-user img{
+    width: 14px !important;
+}
+
+nav #configuracaoDeUsuario .opcoes-user a:hover {
+    background-color: rgb(221, 221, 221);
+}
+

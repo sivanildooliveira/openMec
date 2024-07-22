@@ -1,0 +1,146 @@
+@charset "UTF-8";
+
+legend {
+    font-size: 14px;
+    font-weight: 300;
+    padding: 10px;
+}
+
+legend strong {
+    font-size: 22px;
+    font-weight: 600;
+    padding-right: 10px;
+}
+
+
+#status {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px;
+}
+
+#status ul {
+    display: flex;
+    width: 80vw;
+    max-width: 80vw;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#status ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.custom-checkbox {
+    display: none;
+}
+
+
+.checkbox-label {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.custom-checkbox:checked + .checkbox-label {
+    background-color: #00cc00; /* cor quando marcado */
+}
+
+.checkbox-label::after {
+    content: 'OK';
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border-radius: 50%;
+    font-weight: bolder;
+    color: white;
+    opacity: 0;
+}
+
+.custom-checkbox:checked + .checkbox-label::after {
+    opacity: 1;
+}
+
+
+#status input[type=datetime-local] {
+    background-color: transparent;
+    outline: none;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.582);
+    border: none;
+}
+
+
+
+#FormOs > div {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 1vw 4vw;
+}
+
+
+#FormOs br{
+    width: 100%;
+}
+
+.div-input {
+    width: max-content;
+    height: max-content;
+}
+
+.div-input label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    opacity: .5;
+}
+
+.div-input input {
+    padding: 8px 10px;
+    border: .3px solid rgb(209, 209, 209);
+    outline: none;
+    font-size: 14px;
+}
+
+.div-input input:focus {
+    outline: .3px solid rgb(92, 191, 248) !important;
+    box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.24);
+}
+
+
+.btnSalvar, .btnCancelar {
+    background-color: rgb(25, 52, 126);
+    padding: 10px 40px;
+    color: white;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: .8;
+}
+
+.btnCancelar {
+    background-color: rgb(194, 40, 40);
+    padding: 10px 30px;
+}
+
+.btnSalvar:hover, .btnCancelar:hover {
+    opacity: 1;
+}

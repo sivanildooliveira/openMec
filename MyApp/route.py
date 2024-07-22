@@ -1,3 +1,3 @@
 
-
-from MyApp.modulos.servicos import *
+from MyApp.modulos.route.gerencia import *
+from MyApp.modulos.route.servicos import *
