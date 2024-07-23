@@ -50,7 +50,11 @@
 
 <section>
     <div class="titulo">
-        <h1>Serviços</h1>
+        <h1>Serviços <small>existem <span id="qtdTituloSuperior">40</span> serviços</small></h1>
+        <div>
+            <small>Filtro</small>
+            <input type="text" autofocus onkeyup="filtro(this)">
+        </div>
     </div>
 
     <article>
@@ -67,10 +71,9 @@
                 </tr>
             </thead>
             <tbody>
-                {% for p in range(30) %}
                 {% for i in lista %}
                     {% if i.status < 3 %}
-                    <tr>
+                    <tr class="table-servico active">
                         <td class="tc pec"><small><i class="bi bi-arrow-down-circle-fill"></i> {{i.os}}</small></td>
                         <td class="tl wl"><strong>{{ i.cliente }}</strong> <br> {{ i.fabricante }}  {{ i.modelo }}</td>
                         <td class="tl">(62) 99405-3879</td>
@@ -85,7 +88,7 @@
                         <td class="tc"><a href="{{ url_for('servico_visualizar', id=i.id) }}" class="btn-abrir">Abrir</a></td>
                     </tr>
                     {% endif %}
-                {% endfor %}{% endfor %}
+                {% endfor %}
             </tbody>
         </table>
     </article>
@@ -111,7 +114,7 @@
             <tbody>
                 {% for i in lista %}
                     {% if i.status >= 3 %}
-                        <tr>
+                        <tr class="table-servico active">
                             <td class="tc pec"><strong><i class="bi bi-arrow-down-circle-fill"></i> {{i.os}}</strong></td>
                             <td class="tl wl"><strong>{{ i.cliente }}</strong> <br> {{ i.fabricante }}  {{ i.modelo }}</td>
                             <td class="tl">(62) 99405-3879</td>
@@ -131,5 +134,23 @@
         </table>
     </article>
 </section>
+
+<script>
+    document.getElementById('qtdTituloSuperior').innerHTML = document.querySelectorAll('.table-servico').length
+
+    var filtro = (inp)=>{
+        const filt = inp.value.toUpperCase();
+        document.querySelectorAll('.table-servico').forEach((serv)=>{
+            var textoCompleto = serv.innerText.toUpperCase() || serv.textContent.toUpperCase();
+            console.log(textoCompleto.includes(filt))
+
+            if(textoCompleto.includes(filt)){
+                serv.classList.add('active')
+            }else{
+                serv.classList.remove('active')
+            }
+        })
+    }
+</script>
 
 {% endblock %}
