@@ -29,13 +29,26 @@ def servicos_novidades():
 
 @app.route('/servicos/buscar')
 def servicos_buscar():
-    global informacoes
     informacoes['menu'] = 'buscar'
 
-    pecas = Peca.query.all()
-    mao_de_obra = Maodeobra.query.all()
+    servicos = Servico.query.all()
+    print(servicos)
+    data = []
+    sep = []
+    cont = 0
+    for s in servicos:
+        if cont >= 10:
+            cont = 0
+            sep.append(s)
+            data.append(sep)
+            sep = []
+        else:
+            sep.append(s)
+            cont += 1
+        data.append(sep)
 
-    return render_template('modulos/servicos/buscar.html', informacoes=informacoes)
+
+    return render_template('modulos/servicos/buscar.html', informacoes=informacoes, servicos=data)
 
 
 @app.route('/servicos/<id>')

@@ -1,18 +1,82 @@
 @charset "UTF-8";
 
 
-legend {
-    font-size: 22px;
-    padding: 5px 0px;
+.titulo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    margin-top: -5px;
+}
+
+.titulo h1 {
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.titulo h1 small {
+    font-size: 1.1rem;
+    font-weight: 200;
+}
+
+#controlesDeBusca div {
+    display: flex;
+    align-items: center;
+}
+
+#filter {
+    padding: 5px 15px;
+    background-color: rgb(212, 212, 212);
+    border: 1px solid rgb(212, 212, 212);
+}
+
+#controlesDeBusca {
+    display: flex;
+    align-items: center;
+}
+
+#controlesDeBusca small {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5.6px 15px;
+    background-color: rgb(212, 212, 212);
+    font-size: 16.5px;
+    font-weight: 300;
+}
+
+#controlesDeBusca small img {
+    width: 15px;
+    margin-right: 5px;
+}
+
+#controlesDeBusca div input {
+    width: 300px;
+    padding: 6px 10px;
+    border: 1px solid rgb(212, 212, 212);
+    outline-color: rgba(17, 158, 240, 0.253);
+}
+
+
+article > legend {
+    margin-top: 10px;
+    font-size: 1.3rem;
+    display: block;
+    padding: 12px;
+    background-color: white;
+    border-top: 3px solid rgb(27, 80, 194);
+    border-radius: 5px 5px 0px 0px;
 }
 
 table {
+    position: relative;
     width: 100%;
+    background-color: white;
+    height: 40px;
+    overflow-y: auto;
 }
 
 table thead {
-    position: sticky;
-    top: 80px;
     background-color: white;
     padding: 10px 0px;
 }
