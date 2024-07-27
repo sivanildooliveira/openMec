@@ -17,9 +17,16 @@ class Servico(database.Model):
     d_autorizacao = Column(DateTime)
     d_finalizacao = Column(DateTime)
     d_retirada = Column(DateTime)
-    
-    status = Column(database.Integer, nullable=False)
     servicos = database.relationship('Maodeobra', backref='os', lazy=True)
+
+
+    def retur_total(self):
+        tot = 0
+        for mo in self.servicos:
+            tot += mo.valor
+            for pc in mo.pecas:
+                tot += pc.valor
+        return f'R$ {tot:.2f}'
 
     def data_formatada(self):
         try:
@@ -30,6 +37,7 @@ class Servico(database.Model):
             return data_hora.strftime('%d/%m/%y %H:%M')
         except:
             pass
+    
 
 
 class Maodeobra(database.Model):

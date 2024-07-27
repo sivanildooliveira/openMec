@@ -14,7 +14,7 @@ nav {
     justify-content: start;
     background-color: rgb(250, 250, 250);
     z-index: 1000;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.151);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.226);
 }
 
 nav > img{
@@ -54,8 +54,9 @@ nav #listNav a img {
 }
 
 
-nav #listNav a.active {
+nav #listNav a.active, nav #listNav a.active:hover {
     background-color: #ECF0F5;
+    transform: scale(1);
 }
 
 

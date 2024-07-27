@@ -19,7 +19,7 @@
     font-weight: 200;
 }
 
-#controlesDeBusca div {
+#controlesDeBusca form, #controlesDeBusca div {
     display: flex;
     align-items: center;
 }
@@ -35,7 +35,7 @@
     align-items: center;
 }
 
-#controlesDeBusca small {
+#controlesDeBusca button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -43,14 +43,16 @@
     background-color: rgb(212, 212, 212);
     font-size: 16.5px;
     font-weight: 300;
+    outline: none;
+    border: none;
 }
 
-#controlesDeBusca small img {
+#controlesDeBusca button img {
     width: 15px;
     margin-right: 5px;
 }
 
-#controlesDeBusca div input {
+#controlesDeBusca form input {
     width: 300px;
     padding: 6px 10px;
     border: 1px solid rgb(212, 212, 212);
@@ -87,16 +89,16 @@ table thead th{
 
 table tbody tr {
     transition: .2s;
+    padding: 40px 0px;
 }
 
 
 table tbody tr:hover {
-    background-color: rgb(191, 224, 243);
-    padding: 5px;
+    background-color: rgb(245, 248, 248);
 }
 
 table td {
-    padding: 5px;
+    padding: 10px 0px;
 }
 
 table .status i {
@@ -112,6 +114,20 @@ td, th {
 
 .status i {
     color: rgba(0, 0, 0, 0.226);
+}
+
+
+.btn-abrir {
+    display: block;
+    width: 100%;
+    padding: 8px 15px;
+    background-color: rgb(233, 233, 233);
+    border-radius: 5px;
+}
+
+.btn-abrir:hover {
+    background-color: rgb(236, 232, 232);
+    text-decoration: underline;
 }
 
 

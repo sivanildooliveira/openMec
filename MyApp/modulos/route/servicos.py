@@ -27,28 +27,44 @@ def servicos_novidades():
     return render_template('modulos/servicos/novidades.html', informacoes=informacoes, lista=lista)
 
 
-@app.route('/servicos/buscar')
+@app.route('/servicos/buscar', methods=['GET', 'POST'])
 def servicos_buscar():
     informacoes['menu'] = 'buscar'
-
     servicos = Servico.query.all()
-    print(servicos)
+    
+    termo = ''
+    filtro = 'all'
+    if request.method == 'POST':
+        termo = request.form.get('inputBuscar')
+        filtro = request.form.get('filter')
+
     data = []
     sep = []
     cont = 0
     for s in servicos:
-        if cont >= 10:
-            cont = 0
-            sep.append(s)
-            data.append(sep)
-            sep = []
-        else:
-            sep.append(s)
-            cont += 1
+
+        add = False
+        for k, very in s.__dict__.items():
+            if k == filtro or filtro == 'all':
+                try:
+                    if termo.upper() in very.upper():
+                        add = True
+                        break
+                except:
+                    pass
+        if add:
+            if cont >= 10:
+                cont = 0
+                sep.append(s)
+                data.append(sep)
+                sep = []
+            else:
+                sep.append(s)
+                cont += 1
         data.append(sep)
 
 
-    return render_template('modulos/servicos/buscar.html', informacoes=informacoes, servicos=data)
+    return render_template('modulos/servicos/buscar.html', informacoes=informacoes, servicos=data, termo=termo, filtro=filtro)
 
 
 @app.route('/servicos/<id>')
