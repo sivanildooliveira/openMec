@@ -5,16 +5,30 @@
     <div class="div-nav">
         <ul id="listNav">
             <li>
-                <a href="{{ url_for('gerencia_visao') }}" class="{{ 'active' if informacoes['modulo'] == 'gerencia' else '' }}">
+                {%if informacoes['modulo'] == 'gerencia' %}
+                <div class="link-nav">
+                    <img src="{{ url_for('static', filename='icons/planning.svg') }}" alt="">
+                    GERÊNCIA
+                </div>
+                {% else %}
+                <a href="{{ url_for('gerencia_visao') }}">
                     <img src="{{ url_for('static', filename='icons/planning.svg') }}" alt="">
                     GERÊNCIA
                 </a>
+                {% endif %} 
             </li>
             <li>
-                <a href="{{ url_for('servicos_visao') }}" class="{{ 'active' if informacoes['modulo'] == 'servicos' else '' }}">
+                {%if informacoes['modulo'] == 'servicos' %}
+                <div class="link-nav">
+                    <img src="{{ url_for('static', filename='icons/customer-support.svg') }}" alt="">
+                    SERVIÇOS
+                </div>
+                {% else %}
+                <a href="{{ url_for('servicos_visao') }}">
                     <img src="{{ url_for('static', filename='icons/customer-support.svg') }}" alt="">
                     SERVIÇOS
                 </a>
+                {% endif %}
             </li>
             <li>
                 <a href="">

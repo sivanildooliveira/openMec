@@ -27,6 +27,24 @@ class Servico(database.Model):
             for pc in mo.pecas:
                 tot += pc.valor
         return f'R$ {tot:.2f}'
+    
+
+    def return_data_hora(self, status):
+        
+        try:
+            if status == 1:
+                data = self.d_entrada
+            elif status == 2:
+                data = self.d_autorizacao
+            elif status == 3:
+                data = self.d_finalizacao
+            elif status == 4:
+                data = self.d_retirada
+        
+            return str(datetime.strftime(data, '%Y-%m-%dT%H:%M'))
+        except:
+            return None
+    
 
     def data_formatada(self):
         try:

@@ -12,6 +12,7 @@
 
 {% block main %}
 
+
 <script>
     var requestStatus = (std)=>{
         var idFor = std.getAttribute('idFor')
@@ -56,35 +57,35 @@
         </div>
     </div>
 
-    <article>
-        <table id="ativos">
+    <article id="ativos">
+        <table>
             <legend>Serviços em execução</legend>
             <thead>
                 <tr>
-                    <th class="tc peq" style="width: 14px;">Código</th>
-                    <th class="tl">Cliente</th>
-                    <th class="tl">Contato</th>
-                    <th class="tl">Entrada</th>
-                    <th class="tc">Status</th>
-                    <th class="tc">Opções</th>
+                    <th class="tc peq" style="width: 5%;">Código</th>
+                    <th class="tl" style="width: 45%;">Cliente</th>
+                    <th class="tl" style="width: 15%;">Contato</th>
+                    <th class="tl" style="width: 10%;">Entrada</th>
+                    <th class="tc" style="width: 15%;">Status</th>
+                    <th class="tc" style="width: 10%;"></th>
                 </tr>
             </thead>
             <tbody>
                 {% for i in lista %}
                     {% if i.status < 3 %}
                     <tr class="table-servico active">
-                        <td class="tc pec"><small><i class="bi bi-arrow-down-circle-fill"></i> {{i.os}}</small></td>
-                        <td class="tl wl"><strong>{{ i.cliente }}</strong> <br> {{ i.fabricante }}  {{ i.modelo }}</td>
-                        <td class="tl">(62) 99405-3879</td>
-                        <td class="tl" style="font-size: .9rem; text-wrap: nowrap;">{{ i.data_formatada() }} <br> sem previsão</td>
-                        <td class="tc status">
+                        <td class="tc pec"style="width: 5%;"><small><i class="bi bi-arrow-down-circle-fill"></i> {{i.os}}</small></td>
+                        <td class="tl wl"style="width: 45%;"><strong>{{ i.cliente }}</strong> <br> {{ i.fabricante }}  {{ i.modelo }}</td>
+                        <td class="tl"style="width: 15%;">(62) 99405-3879</td>
+                        <td class="tl" style=" width: 10%; font-size: .9rem; text-wrap: nowrap;">{{ i.data_formatada() }} <br> sem previsão</td>
+                        <td class="tc status"style="width: 100%;">
                             <i class="bi bi-circle-fill {{ 'ck' if i.status >= 1 else ''}}" idFor="{{ i.id }}" valor=1 onclick="requestStatus(this)"></i>
                             <i class="bi bi-circle-fill {{ 'ck' if i.status  >= 2 else ''}}" idFor="{{ i.id }}" valor=2 onclick="requestStatus(this)"></i>
                             <i class="bi bi-circle-fill {{ 'ck' if i.status  >= 3 else ''}}" idFor="{{ i.id }}" valor=3 onclick="requestStatus(this)"></i>
                             <i class="bi bi-circle-fill {{ 'ck' if i.status  == 4 else ''}}" idFor="{{ i.id }}" valor=4 onclick="requestStatus(this)"></i>
                             <i class="bi bi-currency-dollar" style="font-size: 20px; margin-left: -3px; font-weight: 800;"></i>
                         </td>
-                        <td class="tc"><a href="{{ url_for('servico_visualizar', id=i.id) }}" class="btn-abrir">Abrir</a></td>
+                        <td class="tc"style="width: 10%;"><a href="{{ url_for('servico_visualizar', id=i.id) }}" class="btn-abrir">Abrir</a></td>
                     </tr>
                     {% endif %}
                 {% endfor %}
@@ -95,43 +96,62 @@
     
     
     
-    <article>
-        <table id="finalizados">
+    <article id="finalizados" style="width: 100%;">
+        <table style="width: 100%;">
         
             <legend>Serviços Finalizados</legend>
         
             <thead>
                 <tr>
-                    <th class="tc peq" style="width: 14px;">Código</th>
-                    <th class="tl">Cliente</th>
-                    <th class="tl">Contato</th>
-                    <th class="tl">Entrada</th>
-                    <th class="tc">Status</th>
-                    <th class="tc">Opções</th>
+                    <th class="tc peq" style="width: 5%;">Código</th>
+                    <th class="tl" style="width: 45%;">Cliente</th>
+                    <th class="tl" style="width: 15%;">Contato</th>
+                    <th class="tl" style="width: 10%;">Entrada</th>
+                    <th class="tc" style="width: 15%;">Status</th>
+                    <th class="tc" style="width: 10%;"></th>
                 </tr>
             </thead>
             <tbody>
                 {% for i in lista %}
                     {% if i.status >= 3 %}
                         <tr class="table-servico active">
-                            <td class="tc pec"><strong><i class="bi bi-arrow-down-circle-fill"></i> {{i.os}}</strong></td>
-                            <td class="tl wl"><strong>{{ i.cliente }}</strong> <br> {{ i.fabricante }}  {{ i.modelo }}</td>
-                            <td class="tl">(62) 99405-3879</td>
-                            <td class="tl" style="font-size: .9rem; text-wrap: nowrap;">{{ i.data_formatada() }} <br> sem previsão</td>
-                            <td class="tc status">
+                            <td class="tc pec" style="width: 5%;"><strong><i class="bi bi-arrow-down-circle-fill"></i> {{i.os}}</strong></td>
+                            <td class="tl wl" style="width: 45%;"><strong>{{ i.cliente }}</strong> <br> {{ i.fabricante }}  {{ i.modelo }}</td>
+                            <td class="tl" style="width: 15%;">(62) 99405-3879</td>
+                            <td class="tl" style="width: 10%; font-size: .9rem; text-wrap: nowrap;">{{ i.data_formatada() }} <br> sem previsão</td>
+                            <td class="tc status" style="width: 100%;">
                                 <i class="bi bi-circle-fill {{ 'ck' if i.status >= 1 else ''}}" idFor="{{ i.id }}" valor=1 onclick="requestStatus(this)"></i>
                                 <i class="bi bi-circle-fill {{ 'ck' if i.status  >= 2 else ''}}" idFor="{{ i.id }}" valor=2 onclick="requestStatus(this)"></i>
                                 <i class="bi bi-circle-fill {{ 'ck' if i.status  >= 3 else ''}}" idFor="{{ i.id }}" valor=3 onclick="requestStatus(this)"></i>
                                 <i class="bi bi-circle-fill {{ 'ck' if i.status  == 4 else ''}}" idFor="{{ i.id }}" valor=4 onclick="requestStatus(this)"></i>
                                 <i class="bi bi-currency-dollar" style="font-size: 20px; margin-left: -3px; font-weight: 800;"></i>
                             </td>
-                            <td class="tc"><a href="{{ url_for('servico_visualizar', id=i.id) }}" class="btn-abrir">Abrir</a></td>
+                            <td class="tc" style="width: 10%;"><a href="{{ url_for('servico_visualizar', id=i.id) }}" class="btn-abrir">Abrir</a></td>
                         </tr>
                     {% endif %}
                 {% endfor %}
             </tbody>
         </table>
     </article>
+    <script>
+        var verificarQtd = ()=>{
+            let ativos = document.querySelectorAll('#ativos tbody tr')
+            let finalizados = document.querySelectorAll('#finalizados tbody tr')
+            let divMensagem = document.createElement('div')
+            let mensagem = document.createElement('span')
+            divMensagem.className = 'mensagem'
+            mensagem.textContent = 'Não existe serviços a exibir'
+            divMensagem.appendChild(mensagem)
+            console.log(ativos)
+            if(ativos.length == 0){
+                document.querySelector('#ativos').appendChild(divMensagem)
+            }
+            if(finalizados.length == 0){
+                document.querySelector('#finalizados').appendChild(divMensagem)
+            }
+        }
+        verificarQtd()
+    </script>
 </section>
 
 <script>
@@ -149,7 +169,9 @@
                 serv.classList.remove('active')
             }
         })
+        verificarQtd()
     }
+
 </script>
 
 {% endblock %}

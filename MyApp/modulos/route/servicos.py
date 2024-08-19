@@ -19,9 +19,7 @@ def servicos_visao():
 
 @app.route('/servicos/novidades')
 def servicos_novidades():
-    global informacoes
     informacoes['menu'] = 'novidades'
-
     lista = Servico.query.all()
 
     return render_template('modulos/servicos/novidades.html', informacoes=informacoes, lista=lista)

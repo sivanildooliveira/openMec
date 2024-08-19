@@ -37,7 +37,7 @@ nav #listNav {
     padding: 5px;
 }
 
-nav #listNav a {
+nav #listNav a, nav #listNav .link-nav {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -49,12 +49,16 @@ nav #listNav a {
     gap: 3px;
 }
 
-nav #listNav a img {
+.link-nav {
+    cursor: default;
+}
+
+nav #listNav a img, nav #listNav .link-nav img {
     width: 15px;
 }
 
 
-nav #listNav a.active, nav #listNav a.active:hover {
+nav #listNav .link-nav {
     background-color: #ECF0F5;
     transform: scale(1);
 }

@@ -16,13 +16,16 @@
 
 {% block main %}
 
-<div class="titulo">
-    <h1>Serviços <legend>Visualizar</legend></h1> 
-</div>
-
-{% include 'modulos/servicos/components/status.html' %}
 
 <section>
+
+    <div class="titulo">
+        <h1>Serviços <small>visualizar nª <span>{{serv.id}}</span></small></h1>
+    </div>
+
+    <article>
+        {% include 'modulos/servicos/components/status.html' %}
+    </article>
 
     <article id="info-cliente">
 

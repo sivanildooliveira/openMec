@@ -2,15 +2,36 @@
 
 .titulo {
     display: flex;
-    padding: 12px;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    margin-top: -5px;
 }
 
 .titulo h1 {
-    display: flex;
-    align-items: baseline;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 400;
-    gap: 15px;
+}
+
+.titulo h1 small {
+    font-size: 1.1rem;
+    font-weight: 200;
+}
+
+.titulo div {
+    display: flex;
+    align-items: center;
+    margin-bottom: -5px;
+}
+
+.titulo div small {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5.6px 15px;
+    background-color: rgb(212, 212, 212);
+    font-size: 16.5px;
+    font-weight: 300;
 }
 
 
