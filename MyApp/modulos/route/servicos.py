@@ -16,7 +16,6 @@ def servicos_visao():
     return render_template('modulos/servicos/visao.html', informacoes=informacoes, lista=lista)
 
 
-
 @app.route('/servicos/novidades')
 def servicos_novidades():
     informacoes['menu'] = 'novidades'

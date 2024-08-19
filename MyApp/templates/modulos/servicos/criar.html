@@ -31,23 +31,54 @@
                 </div>
                 <div class="div-input">
                     <label for="placa">Placa</label>
-                    {{ form.placa(style='width: 70vw') }}
+                    {{ form.placa(style='width: 65vw') }}
                 </div>
-                
                 <div class="div-input">
                     <label for="fabricante">Fabricante</label>
                     {{ form.fabricante() }}
                 </div>
                 <div class="div-input">
-                    <label for="placa">Modelo</label>
-                    {{ form.modelo(style='width: 70vw') }}
+                    <label for="modelo">Modelo</label>
+                    {{ form.modelo(style='width: 30vw') }}
                 </div>
                 <div class="div-input">
-                    <label for="placa">Ano de Fabricação</label>
+                    <label for="ano">Ano de Fabricação</label>
                     {{ form.ano() }}
                 </div>
                 <div class="div-input">
-                    <label for="placa">Cor</label>
+                    <label for="anomodelo">Ano Modelo</label>
+                    {{ form.anomodelo() }}
+                </div>
+                <div class="div-input">
+                    <label for="cilindrada">Cilindrada</label>
+                    {{ form.cilindrada() }}
+                </div>
+                <div class="div-input">
+                    <label for="motor">Nª Motor</label>
+                    {{ form.motor() }}
+                </div>
+                <div class="div-input">
+                    <label for="potencia">Potencia</label>
+                    {{ form.potencia() }}
+                </div>
+                <div class="div-input">
+                    <label for="combustivel">Combustivel</label>
+                    {{ form.combustivel() }}
+                </div>
+                <div class="div-input">
+                    <label for="uf">UF</label>
+                    {{ form.uf() }}
+                </div>
+                <div class="div-input">
+                    <label for="municipio">Municipio</label>
+                    {{ form.municipio() }}
+                </div>
+                <div class="div-input">
+                    <label for="importado">Importado</label>
+                    {{ form.importado() }}
+                </div>
+                <div class="div-input">
+                    <label for="cor">Cor</label>
                     {{ form.cor() }}
                 </div>
                 <div class="div-input">
@@ -73,6 +104,34 @@
         })
     })
         
+</script>
+
+<script>
+    document.getElementById('placa').addEventListener('keyup', (placa)=>{
+        pl = placa.target.value
+        if(pl.length == 7){
+            let link = "{{ url_for('returDataVeiculo', placa='') }}" + pl
+            fetch(link)
+            .then(response => response.json())  // Converte a resposta para JSON
+            .then(data => {
+                document.getElementById('fabricante').value = data['Marca']
+                document.getElementById('modelo').value = data['Modelo']
+                document.getElementById('ano').value = data['Ano']
+                document.getElementById('cor').value = data['Cor']
+                document.getElementById('anomodelo').value = data['AnoModelo']
+                document.getElementById('combustivel').value = data['Combustível']
+                document.getElementById('motor').value = data['Motor']
+                document.getElementById('potencia').value = data['Potencia']
+                document.getElementById('uf').value = data['UF']
+                document.getElementById('municipio').value = data['Município']
+                document.getElementById('cilindrada').value = data['Cilindrada']
+                document.getElementById('importado').value = data['Importado']
+                
+            })    // Manipula os dados retornados
+            .catch(error => console.error('Erro:', error));  // Lida com erros
+
+        }
+    })
 </script>
 
 {% endblock %}
