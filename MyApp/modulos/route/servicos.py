@@ -1,4 +1,4 @@
-from flask import render_template, url_for, request
+from flask import render_template, url_for, request, redirect
 from MyApp import app, database, informacoes
 from MyApp.modulos.database.servisos_models import Servico, Maodeobra, Peca
 from MyApp.form import FormOs
@@ -90,7 +90,7 @@ def servicos_criar():
 
     if form.validate_on_submit():
 
-        os = datetime.now().second
+        os = len(Servico.query.all())
         placa = form.placa.data
         cliente = form.cliente.data
         fabricante = form.fabricante.data
@@ -102,6 +102,8 @@ def servicos_criar():
         n = Servico(os=os, placa=placa, cliente=cliente, fabricante=fabricante, modelo=modelo, ano=ano, cor=cor, status=status)
         database.session.add(n)
         database.session.commit()
+
+        return redirect(url_for('servico_visualizar', id=n.id))
 
     return render_template('modulos/servicos/criar.html', informacoes=informacoes, form=form, data_hora=data_hora)
 
