@@ -14,7 +14,7 @@ def returDataVeiculo(placa):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36'
     }
     response = requests.get(url, headers=headers)
-
+    print(response)
     # Verificando se a requisição foi bem-sucedida
     if response.status_code == 200:
         # Analisando o conteúdo HTML da página
