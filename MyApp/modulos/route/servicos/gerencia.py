@@ -1,8 +1,7 @@
 from flask import render_template, url_for, request
 from MyApp import app, database, informacoes
-from MyApp.modulos.database.servisos_models import Servico, Maodeobra, Peca
+from MyApp.models import *
 from MyApp.defs_aux import *
-import json
 
 
 @app.route('/gerencia')

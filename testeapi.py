@@ -69,4 +69,5 @@ def returDataVeiculo(placa):
     else:
         return {'status': None}
 
-print(returDataVeiculo('omq8c33'))
+n = int('35')
+print(n)

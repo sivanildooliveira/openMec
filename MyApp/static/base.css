@@ -11,6 +11,10 @@
     font-size: 14px;
 }
 
+input {
+    text-transform: uppercase;
+}
+
 body {
     background-color: #ECF0F5;
 }
@@ -24,6 +28,7 @@ main {
 }
 
 main > section {
+    position: relative;
     padding: 15px !important;
 }
 

@@ -20,7 +20,7 @@
 <section>
 
     <div class="titulo">
-        <h1>Serviços <small>visualizar nª <span>{{serv.id}}</span></small></h1>
+        <h1>Serviços <small>visualizar nª <strong>{{serv.os}}</strong></small></h1>
     </div>
 
     <article>
@@ -31,32 +31,32 @@
 
         <div style="min-width: 400px;">
             <strong>Cliente</strong>
-            <span style="color: rgb(23, 135, 240); font-weight: 400; font-size: 1.2rem !important;"> <i class="bi bi-arrow-up-right-square-fill"></i> {{ serv.cliente }}</span>
+            <span style="color: rgb(23, 135, 240); font-weight: 400; font-size: 1.2rem !important;"> <i class="bi bi-arrow-up-right-square-fill"></i> {{ serv.cliente.nome_cliente }}</span>
         </div>
 
         <div>
             <strong>telefone</strong>
-            <span>{{ serv.cliente }}</span>
+            <span>{{ serv.cliente.telefone }}</span>
         </div>
 
         <div>
             <strong>Celular</strong>
-            <span>{{ serv.cliente }}</span>
+            <span>{{ serv.cliente.celular }}</span>
         </div>
 
         <div style="min-width: 50%;">
             <strong>Cpf/Cnpj</strong>
-            <span>{{ serv.cliente }}</span>
+            <span>{{ serv.cliente.cpf }}</span>
         </div>
 
         <div style="min-width: 40%;">
             <strong>Email</strong>
-            <span>{{ serv.cliente }}</span>
+            <span>{{ serv.cliente.email }}</span>
         </div>
 
         <div>
             <strong style="min-width: 100%;">Endereço</strong>
-            <span>{{ serv.cliente }}</span>
+            <span>Rua/Avenida: {{ serv.cliente.rua }}, Nª {{ serv.cliente.numero }} , {{ serv.cliente.complemento }} - {{ serv.cliente.cep }} - {{ serv.cliente.bairro }} - {{ serv.cliente.cidade }} - {{ serv.cliente.estado }}</span>
         </div>
     </article>
     <br>
@@ -70,17 +70,16 @@
 
         <div>
             <strong>Veiculo</strong>
-            <div style="background-color: rgb(223, 223, 223); padding-left: 5px;">
+            <div style="background-color: rgb(223, 223, 223); padding-left: 5px; width: 100%;">
                 <i class="bi bi-car-front-fill" style="padding: 0px 10px;"></i>
-                <input style="width: 500px; text-align: left;" type="text" id="veiculo" name="veiculo" value="{{ serv.placa }} - {{ serv.fabricante }} - {{ serv.modelo }} - {{ serv.ano }} - {{ serv.cor }} " disabled>
+                <input style="width: 50vw; text-align: left;" type="text" id="veiculo" name="veiculo" value="{{ serv.veiculo.placa }} - {{ serv.veiculo.fabricante }} - {{ serv.veiculo.modelo }} - {{ serv.veiculo.cilindrada }} - {{ serv.veiculo.combustivel }} - {{ serv.veiculo.ano }}/{{ serv.veiculo.anomodelo }} - {{ serv.veiculo.cor }} - {{ serv.veiculo.motor }} - {{ serv.veiculo.chassi }} " disabled>
             </div>
         </div>
 
     </article>
 
-    <article>
-        {% include 'modulos/servicos/components/servico.html' %}
-    </article>
+
+    {% include 'modulos/servicos/components/servico.html' %}
 </section>
 
 

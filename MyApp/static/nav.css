@@ -61,6 +61,7 @@ nav #listNav a img, nav #listNav .link-nav img {
 nav #listNav .link-nav {
     background-color: #ECF0F5;
     transform: scale(1);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.226);
 }
 
 

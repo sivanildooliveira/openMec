@@ -28,11 +28,27 @@
         
     </main>
 
-    {% block footer %}
-    {% endblock %}
+    <footer>
+        {% block footer %}
+        
+        {% endblock %}
+    </footer>
+    
 
     {% block scripts %}
     {% endblock %}
+
+    <script>
+        document.querySelectorAll('input').forEach(function (input) {
+            input.autocomplete = 'off'
+            input.addEventListener('input', function () {
+                // Expressão regular para substituir letras minúsculas por maiúsculas
+                this.value = this.value.replace(/[a-z]/g, function (letter) {
+                    return letter.toUpperCase();
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

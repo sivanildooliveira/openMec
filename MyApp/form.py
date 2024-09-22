@@ -21,10 +21,12 @@ class FormCliente(FlaskForm):
 
 
 class FormOs(FlaskForm):
-    placa = StringField('Placa')
-    cliente = StringField('Cliente')
-    fabricante = StringField('Fabricante')
-    modelo = StringField('Modelo')
+    
+    id_cliente = StringField()
+
+    placa = StringField('Placa', validators=[DataRequired()])
+    fabricante = StringField('Fabricante', validators=[DataRequired()])
+    modelo = StringField('Modelo', validators=[DataRequired()])
     ano = StringField('Ano')
     anomodelo = StringField('Ano Modelo')
     cilindrada = StringField('Cilindrada')
@@ -39,5 +41,17 @@ class FormOs(FlaskForm):
     importado = StringField('Importado')
     cor = StringField('Cor')
 
+    nome_cliente = StringField('Nome do Cliente', validators=[DataRequired()])
+    telefone = StringField('Telefone')
+    celular = StringField('Celular', validators=[DataRequired()])
+    email = StringField('Email')
+    cpf = StringField('CPF')
+    cep = StringField('CEP')
+    estado = StringField('Estado')
+    cidade = StringField('Cidade')
+    bairro = StringField('Bairro')
+    rua = StringField('Rua')
+    numero = StringField('Número')
+    complemento = StringField('Complemento')
     submit = SubmitField('Salvar')
 

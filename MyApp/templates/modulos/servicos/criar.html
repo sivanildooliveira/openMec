@@ -16,80 +16,151 @@
 <legend><strong>Serviços</strong> Criar Novo Serviço</legend>
 
 <section>
-
     <article>
-        {% include 'modulos/servicos/components/status.html' %}
-    </article>
-
-    <article>
-        <form action="" id="FormOs" method="POST">
-            <div>
-                {{ form.csrf_token }}
+        <form action="{{ url_for('servicos_criar') }}" id="FormOs" method="POST" autocomplete="new-name">
+            <div class="campos-input">
+                {{ form.hidden_tag() }}
+                <div style="display: none">
+                    {{ form.id_cliente() }}
+                </div>
                 <div class="div-input">
                     <label for="codigo">Codigo</label>
                     <input type="text" disabled placeholder="Automatico" style="text-align: center;">
                 </div>
                 <div class="div-input">
-                    <label for="placa">Placa</label>
-                    {{ form.placa(style='width: 65vw') }}
+                    <label for="veiculo">Veiculo</label>
+                    <input id="veiculo" type="text" style="width: 60vw;">
+                    <ul id="veiculoResult" class="result">
+                        <li> <span>NOVO</span> PLACA VEICULO</li>
+                    </ul>
                 </div>
-                <div class="div-input">
-                    <label for="fabricante">Fabricante</label>
-                    {{ form.fabricante() }}
+                <div class="div-input inputs-veiculo">
+                    <label for="placa">{{ form.placa.label }}</label>
+                    {{ form.placa(style='width: 150px', required=True) }}
                 </div>
-                <div class="div-input">
-                    <label for="modelo">Modelo</label>
-                    {{ form.modelo(style='width: 30vw') }}
+                <div class="div-input inputs-veiculo">
+                    <label for="fabricante">{{ form.fabricante.label }}</label>
+                    {{ form.fabricante(required=True) }}
                 </div>
-                <div class="div-input">
-                    <label for="ano">Ano de Fabricação</label>
-                    {{ form.ano() }}
+                <div class="div-input inputs-veiculo">
+                    <label for="modelo">{{ form.modelo.label }}</label>
+                    {{ form.modelo(style='width: 30vw', required=True) }}
                 </div>
-                <div class="div-input">
-                    <label for="anomodelo">Ano Modelo</label>
-                    {{ form.anomodelo() }}
+                <div class="div-input inputs-veiculo">
+                    <label for="ano">{{ form.ano.label }}</label>
+                    {{ form.ano(style='width: 100px') }}
                 </div>
-                <div class="div-input">
-                    <label for="cilindrada">Cilindrada</label>
-                    {{ form.cilindrada() }}
+                <div class="div-input inputs-veiculo">
+                    <label for="anomodelo">{{ form.anomodelo.label }}</label>
+                    {{ form.anomodelo(style='width: 100px') }}
                 </div>
-                <div class="div-input">
-                    <label for="motor">Nª Motor</label>
-                    {{ form.motor() }}
+                <div class="div-input inputs-veiculo">
+                    <label for="cilindrada">{{ form.cilindrada.label }}</label>
+                    {{ form.cilindrada(style='width: 80px') }}
                 </div>
-                <div class="div-input">
-                    <label for="potencia">Potencia</label>
-                    {{ form.potencia() }}
+                <div class="div-input inputs-veiculo">
+                    <label for="motor">{{ form.motor.label }}</label>
+                    {{ form.motor(style='width: 120px') }}
                 </div>
-                <div class="div-input">
-                    <label for="combustivel">Combustivel</label>
+                <div class="div-input inputs-veiculo">
+                    <label for="potencia">{{ form.potencia.label }}</label>
+                    {{ form.potencia(style='width: 80px') }}
+                </div>
+                <div class="div-input inputs-veiculo">
+                    <label for="combustivel">{{ form.combustivel.label }}</label>
                     {{ form.combustivel() }}
                 </div>
-                <div class="div-input">
-                    <label for="uf">UF</label>
-                    {{ form.uf() }}
+                <div class="div-input inputs-veiculo">
+                    <label for="uf">{{ form.uf.label }}</label>
+                    {{ form.uf(style='width: 40px') }}
                 </div>
-                <div class="div-input">
-                    <label for="municipio">Municipio</label>
+                <div class="div-input inputs-veiculo">
+                    <label for="municipio">{{ form.municipio.label }}</label>
                     {{ form.municipio() }}
                 </div>
-                <div class="div-input">
-                    <label for="importado">Importado</label>
-                    {{ form.importado() }}
+                <div class="div-input inputs-veiculo">
+                    <label for="importado">{{ form.importado.label }}</label>
+                    {{ form.importado(style='width: 80px') }}
                 </div>
-                <div class="div-input">
-                    <label for="cor">Cor</label>
+                <div class="div-input inputs-veiculo">
+                    <label for="cor">{{ form.cor.label }}</label>
                     {{ form.cor() }}
                 </div>
+            </div>
+
+    
+            
+            <div id="campoCliente" class="campos-input">
+                
                 <div class="div-input">
-                    <label for="cliente">Cliente</label>
-                    {{ form.cliente(style='width: 50vw') }}
+                    <label for="nome_cliente">{{ form.nome_cliente.label }}</label>
+                    {{ form.nome_cliente(style='width: 50vw', autocomplete="off", required=True) }}
+                    <ul id="nomeResult" class="result">
+                    </ul>
                 </div>
+
+                <div class="div-input inputs-cliente">
+                    <label for="telefone">{{ form.telefone.label }}</label>
+                    {{ form.telefone() }}
+                </div>
+
+                <div class="div-input inputs-cliente">
+                    <label for="celular">{{ form.celular.label }}</label>
+                    {{ form.celular(required=True) }}
+                </div>
+
+                <div class="div-input inputs-cliente">
+                    <label for="email">{{ form.email.label }}</label>
+                    {{ form.email(style='width: 30vw') }}
+                </div>
+
+                <div class="div-input inputs-cliente">
+                    <label for="cpf">{{ form.cpf.label }}</label>
+                    {{ form.cpf(style='width: 20vw') }}
+                </div>
+                <div class="div-input inputs-cliente">
+                    <label for="cep">{{ form.cep.label }}</label>
+                    {{ form.cep() }}
+                </div>
+
+                <div class="div-input inputs-cliente">
+                    <label for="estado">{{ form.estado.label }}</label>
+                    {{ form.estado() }}
+                </div>
+
+                <div class="div-input inputs-cliente">
+                    <label for="cidade">{{ form.cidade.label }}</label>
+                    {{ form.cidade() }}
+                </div>
+                
+                <div class="div-input inputs-cliente">
+                    <label for="bairro">{{ form.bairro.label }}</label>
+                    {{ form.bairro(style='width: 20vw') }}
+                </div>
+                
+                <div class="div-input inputs-cliente">
+                    <label for="rua">{{ form.rua.label }}</label>
+                    {{ form.rua(style='width: 20vw') }}
+                </div>
+
+                <div class="div-input inputs-cliente">
+                    <label for="numero">{{ form.numero.label }}</label>
+                    {{ form.numero(style='width: 5vw') }}
+                </div>
+
+                <div class="div-input inputs-cliente">
+                    <label for="complemento">{{ form.complemento.label }}</label>
+                    {{ form.complemento(style='width: 30vw') }}
+                </div>
+                
+                
             </div>
-            <div>
+
+            <div id="footer">
                 {{ form.submit(class='btnSalvar') }}
-                <button class="btnCancelar">Cancelar</button>
+                <a class="btnCancelar" onclick="history.back()">Cancelar</a>
             </div>
+
         </form>
     </article>
 </section>
@@ -98,38 +169,182 @@
 
 
 {% block scripts %}
+
 <script>
-    document.querySelectorAll('#status ul li input[type=checkbox]').forEach((stt)=>{
-        stt.addEventListener('change', ()=>{
-        })
+
+    var resultadosVeiculo = document.getElementById('veiculoResult')
+    var resultadosCliente = document.getElementById('nomeResult')
+    var dataBusca = []
+    
+    document.getElementById('veiculo').addEventListener('blur', ()=>{
+        setTimeout(()=>{
+            resultadosVeiculo.style.display = 'none'
+        }, 800)
     })
+    
+    document.getElementById('veiculo').addEventListener('keyup', (inp)=>{
+        resultadosVeiculo.style.display = 'block'
+        resultadosVeiculo.innerHTML = `<li presset='new' onclick="addVeiculoNovo(this)" > <span>NOVO</span>${inp.target.value}</li>`
+        if (inp.target.value.length > 1){
+            fetch("{{ url_for('listVeiculo', term='') }}" + inp.target.value).then(resp => resp.json()).then(resp => {
+
+                dataBusca = resp
+
+                resp.forEach((rest, i)=>{
+                    
+                    let li = document.createElement('li')
+
+                    const veiculo = rest['veiculo']
+                    const cliente = rest['cliente']
+
+                    for(let chave in veiculo){
+                        li.setAttribute(chave, veiculo[chave])
+                    }
+
+                    li.setAttribute('onclick', 'addVeiculoExist(this)')
+                    li.setAttribute('posicao', i)
+
+                    li.innerHTML = `${veiculo['placa']} - ${veiculo['fabricante']} - ${veiculo['modelo']} -${veiculo['ano']} - ${veiculo['cor']} - ${cliente['nome_cliente']} -`
+
+                    resultadosVeiculo.appendChild(li)
+                })
+                
+            }).catch(
+
+            )
+        }
+    })
+
+    var addVeiculoExist = (order)=>{
+
+        for (let attr of order.attributes) {
+            try {
+                document.getElementById(attr.name).value = attr.value
+            } catch{}
+        }
+
+        document.getElementById('veiculo').value = `${order.getAttribute('placa')} - ${order.getAttribute('marca')} - ${order.getAttribute('modelo')} - ${order.getAttribute('cilindrada')} - ${order.getAttribute('ano')} - ${order.getAttribute('cor')}`
+
+        var cliente = dataBusca[order.getAttribute('posicao')]['cliente']
+        document.getElementById('id_cliente').value = cliente['id']
+
+        for(let chave in cliente){
+            try {
+                document.getElementById(chave).value = cliente[chave]
+            } catch{}
+        }
+
+        //document.querySelectorAll('.inputs-veiculo input').forEach((inputs)=>{
+        //    inputs.disabled = true
+        //})
+//
+        //document.querySelectorAll('.inputs-cliente input').forEach((inputs)=>{
+        //    inputs.disabled = true
+        //})
+    }
+
+    var addVeiculoNovo = (order)=>{
+        valor = order.getAttribute('presset')
+        document.querySelectorAll('.inputs-veiculo input').forEach((inputs)=>{
+            inputs.disabled = false
+        })
+        if(valor != 'new'){
+        }
+        document.getElementById('placa').value = document.getElementById('veiculo').value
+        document.getElementById('placa').focus()
+        document.getElementById('placa').dispatchEvent(new Event('input'))
+    }
+
+
+    document.getElementById('nome_cliente').addEventListener('blur', ()=>{
+        setTimeout(()=>{
+            resultadosCliente.style.display = 'none'
+        }, 800)
+    })
+
+    document.getElementById('nome_cliente').addEventListener('input', (inp)=>{
+        resultadosCliente.style.display = 'block'
+        resultadosCliente.innerHTML = `<li onclick="addClienteNovo(this)"> <span>NOVO</span>${inp.target.value}</li>`
+        if (inp.target.value.length > 1){
+            fetch("{{ url_for('listCliente', term='') }}" + inp.target.value).then(resp => resp.json()).then(resp => {
+            resp.forEach((cliente)=>{
+
+                resultadosCliente.innerHTML += `
+                
+                <li id_cli="${cliente['id']}" nome="${cliente['nome']}" telefone="${cliente['telefone']}" celular="${cliente['celular']}" email="${cliente['email']}" cpf="${cliente['cpf']}" cep="${cliente['cep']}" estado="${cliente['estado']}" cidade="${cliente['cidade']}" bairro="${cliente['bairro']}" rua="${cliente['rua']}" numero="${cliente['numero']}"  complemento="${cliente['complemento']}" onclick="addClienteExist(this)">
+
+                    ${cliente['nome']}, ${cliente['celular']}
+
+                </li>`
+                })
+            })
+        }
+    })
+
+    var addClienteExist = (order)=>{
+        document.getElementById('id_cliente').value = order.getAttribute('id_cli')
+        document.getElementById('nome_cliente').value = order.getAttribute('nome')
+        document.getElementById('telefone').value = order.getAttribute('telefone')
+        document.getElementById('celular').value = order.getAttribute('celular')
+        document.getElementById('email').value = order.getAttribute('email')
+        document.getElementById('cpf').value = order.getAttribute('cpf')
+        document.getElementById('cep').value = order.getAttribute('cep')
+        document.getElementById('estado').value = order.getAttribute('estado')
+        document.getElementById('cidade').value = order.getAttribute('cidade')
+        document.getElementById('bairro').value = order.getAttribute('bairro')
+        document.getElementById('rua').value = order.getAttribute('rua')
+        document.getElementById('numero').value = order.getAttribute('numero')
+        document.getElementById('complemento').value = order.getAttribute('complemento')
+
+        //document.querySelectorAll('.inputs-cliente input').forEach((inputs)=>{
+        //    inputs.disabled = true
+        //})
+    }
+
+    var addClienteNovo = (order)=>{
+        document.getElementById('id_cliente').value = ''
         
+        document.querySelectorAll('.inputs-cliente input').forEach((inputs)=>{
+            inputs.value = ''
+            inputs.disabled = false
+        })
+    }
+
 </script>
 
 <script>
-    document.getElementById('placa').addEventListener('keyup', (placa)=>{
+    document.getElementById('placa').addEventListener('input', (placa) => {
         pl = placa.target.value
-        if(pl.length == 7){
+        if (pl.length == 7) {
             let link = "{{ url_for('returDataVeiculo', placa='') }}" + pl
             fetch(link)
-            .then(response => response.json())  // Converte a resposta para JSON
-            .then(data => {
-                document.getElementById('fabricante').value = data['Marca']
-                document.getElementById('modelo').value = data['Modelo']
-                document.getElementById('ano').value = data['Ano']
-                document.getElementById('cor').value = data['Cor']
-                document.getElementById('anomodelo').value = data['AnoModelo']
-                document.getElementById('combustivel').value = data['Combustível']
-                document.getElementById('motor').value = data['Motor']
-                document.getElementById('potencia').value = data['Potencia']
-                document.getElementById('uf').value = data['UF']
-                document.getElementById('municipio').value = data['Município']
-                document.getElementById('cilindrada').value = data['Cilindrada']
-                document.getElementById('importado').value = data['Importado']
-                
-            })    // Manipula os dados retornados
-            .catch(error => console.error('Erro:', error));  // Lida com erros
+                .then(response => response.json())
+                .then(data => {
+                    if (data['Marca']) {
+                        alert('sucesso na consulta da placa')
+                        document.getElementById('fabricante').value = data['Marca']
+                        document.getElementById('modelo').value = data['Modelo']
+                        document.getElementById('ano').value = data['Ano']
+                        document.getElementById('cor').value = data['Cor']
+                        document.getElementById('anomodelo').value = data['AnoModelo']
+                        document.getElementById('combustivel').value = data['Combustível']
+                        document.getElementById('motor').value = data['Motor']
+                        document.getElementById('potencia').value = data['Potencia']
+                        document.getElementById('uf').value = data['UF']
+                        document.getElementById('municipio').value = data['Município']
+                        document.getElementById('cilindrada').value = data['Cilindrada']
+                        document.getElementById('importado').value = data['Importado']
 
+                        document.querySelectorAll('#FormOs .campos-input input').forEach((input) => {
+                            if (input.value == 'undefined') {
+                                input.value = ''
+                            }
+                        })
+                        document.getElementById('nome_cliente').focus()
+                    } else {}
+
+                })    // Manipula os dados retornados
+                .catch(error => console.error('Erro:', error));  // Lida com erros
         }
     })
 </script>

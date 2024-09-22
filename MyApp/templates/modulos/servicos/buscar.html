@@ -28,18 +28,9 @@
         <form method="post">
             <select name="filter" id="filter" >
                 <option value="all" {% if filtro == 'all' %}selected{% endif %}>Todos os campos</option>
-                <option value="os" {% if filtro == 'os' %}selected{% endif %}>Nª Serviço</option>
-                <option value="status" {% if filtro == 'status' %}selected{% endif %}>Status</option>
-                <option value="placa" {% if filtro == 'placa' %}selected{% endif %}>Placa</option>
-                <option value="cliente" {% if filtro == 'cliente' %}selected{% endif %}>Cliente</option>
-                <option value="fabricante" {% if filtro == 'fabricante' %}selected{% endif %}>Marca</option>
-                <option value="modelo" {% if filtro == 'modelo' %}selected{% endif %}>Modelo</option>
-                <option value="ano" {% if filtro == 'ano' %}selected{% endif %}>Ano</option>
-                <option value="cor" {% if filtro == 'cor' %}selected{% endif %}>Cor</option>
-                <option value="d_entrada" {% if filtro == 'd_entrada' %}selected{% endif %}>Data de Entrada</option>
-                <option value="d_autorizacao" {% if filtro == 'd_autorizacao' %}selected{% endif %}>Data de Autorização</option>
-                <option value="d_finalizacao" {% if filtro == 'd_finalizacao' %}selected{% endif %}>Data de Finalização</option>
-                <option value="d_retirada" {% if filtro == 'd_retirada' %}selected{% endif %}>Data de Retirada</option>
+                {% for camp in informacoes['filtros_db'] %}
+                    <option value="{{ camp[0] }}" {% if filtro == '{{ camp[0] }}' %}selected{% endif %}>{{ camp[1] }}</option>
+                {% endfor %}
             </select>
             <div>
                 <input type="text" autofocus name="inputBuscar" id="inputBuscar" value="{{termo}}">
@@ -53,16 +44,16 @@
     
     <article id="ListaServicos">
         
-        <legend>Pesquisar serviço</legend>
+        <legend>Pesquisar Serviço</legend>
         <table>
             <thead>
                 <tr>
                     <th class="tc"></th>
                     <th class="tc">O.S</th>
                     <th class="tl">Cliente</th>
+                    <th class="tl">Placa</th>
                     <th class="tl">Marca</th>
                     <th class="tl">Modelo</th>
-                    <th class="tl">Placa</th>
                     <th class="tl">Valor Total</th>
                     <th></th>
                 </tr>
@@ -72,10 +63,10 @@
                 <tr>
                     <td class="tc"><i class="bi bi-info-circle"></i></td>
                     <td class="tc">{{serv.os}}</td>
-                    <td class="tl">{{serv.cliente}}</td>
-                    <td class="tl">{{serv.fabricante}}</td>
-                    <td class="tl">{{serv.modelo}}</td>
-                    <td class="tl">{{serv.placa}}</td>
+                    <td class="tl">{{serv.cliente.nome_cliente}}</td>
+                    <td class="tl">{{serv.veiculo.placa}}</td>
+                    <td class="tl">{{serv.veiculo.fabricante}}</td>
+                    <td class="tl">{{serv.veiculo.modelo}}</td>
                     <td class="tl">{{ serv.retur_total() }}</td>
                     <td class="tc"> <a href="{{ url_for('servico_visualizar', id=serv.id)}}" class="btn-abrir">abrir</a> </td>
                 </tr>

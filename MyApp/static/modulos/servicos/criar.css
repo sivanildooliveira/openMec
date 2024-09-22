@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+section {
+    margin-bottom: 85px;
+}
+
 legend {
     font-size: 14px;
     font-weight: 300;
@@ -17,8 +21,8 @@ legend strong {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
-    padding: 1vw 4vw;
+    gap: 5px 20px;
+    margin-bottom: 5px;
 }
 
 
@@ -27,27 +31,69 @@ legend strong {
 }
 
 .div-input {
+    position: relative;
     width: max-content;
     height: max-content;
 }
 
 .div-input label {
-    font-weight: bold;
+    font-weight: 600;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
     opacity: .5;
 }
 
 .div-input input {
-    padding: 8px 10px;
+    font-style: 700 !important;
+    font-size: 16px !important;
+    padding: 7px 8px;
     border: .3px solid rgb(209, 209, 209);
     outline: none;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .div-input input:focus {
     outline: .3px solid rgb(92, 191, 248) !important;
     box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.24);
+}
+
+.result {
+    display: none;
+    z-index: 500;
+    position: absolute;
+    top: 105%;
+    background-color: white;
+    width: 100%;
+    max-height: 30vh;
+    overflow-y: auto;
+}
+
+
+.result li {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 45px;
+    padding: 0px 8px;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.555);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.089);
+}
+
+.result li span{
+    background-color: limegreen;
+    padding: 5px;
+    color: white;
+    text-shadow: 0px 0px 2px black;
+    font-weight: 800;
+    border-radius: 5px;
+}
+
+.result li:hover{
+    background-color: rgb(200, 235, 255);
+    
 }
 
 
@@ -69,4 +115,20 @@ legend strong {
 
 .btnSalvar:hover, .btnCancelar:hover {
     opacity: 1;
+}
+
+
+#footer {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 30px !important;
+    position: fixed;
+    bottom: 0px;
+    width: calc(100% - 93px);
+    height: 80px;
+    padding: 15px;
+    padding-left: 63px !important;
+    background-color: rgb(250, 250, 250);
+    z-index: 600;
 }
