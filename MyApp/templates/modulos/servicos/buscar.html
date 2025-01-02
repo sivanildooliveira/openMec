@@ -27,13 +27,22 @@
         
         <form method="post">
             <select name="filter" id="filter" >
-                <option value="all" {% if filtro == 'all' %}selected{% endif %}>Todos os campos</option>
                 {% for camp in informacoes['filtros_db'] %}
-                    <option value="{{ camp[0] }}" {% if filtro == '{{ camp[0] }}' %}selected{% endif %}>{{ camp[1] }}</option>
+                    <option value="{{ camp[0] }}" {% if camp[0] != filtro %}{% else %}selected{% endif %}>{{ camp[1] }}</option>
                 {% endfor %}
             </select>
             <div>
                 <input type="text" autofocus name="inputBuscar" id="inputBuscar" value="{{termo}}">
+                <script>
+                    // Função para colocar o cursor no final do campo de texto
+                    function posicionarCursorNoFinal() {
+                      var input = document.getElementById('inputBuscar');
+                      input.focus();
+                      input.setSelectionRange(input.value.length, input.value.length);
+                    }
+                
+                    window.onload = posicionarCursorNoFinal; // Chama a função quando a página carregar
+                </script>
                 <button type="submit">
                     <img src="{{ url_for('static', filename='icons/search.svg') }}" alt=""> Pesquisar
                 </button>
@@ -59,16 +68,16 @@
                 </tr>
             </thead>
             <tbody>
-                {% for serv in servicos[0] %}
+                {% for serv in servicos %}
                 <tr>
                     <td class="tc"><i class="bi bi-info-circle"></i></td>
-                    <td class="tc">{{serv.os}}</td>
-                    <td class="tl">{{serv.cliente.nome_cliente}}</td>
-                    <td class="tl">{{serv.veiculo.placa}}</td>
-                    <td class="tl">{{serv.veiculo.fabricante}}</td>
-                    <td class="tl">{{serv.veiculo.modelo}}</td>
-                    <td class="tl">{{ serv.retur_total() }}</td>
-                    <td class="tc"> <a href="{{ url_for('servico_visualizar', id=serv.id)}}" class="btn-abrir">abrir</a> </td>
+                    <td class="tc">{{serv["os"]}}</td>
+                    <td class="tl">{{serv["nome_cliente"]}}</td>
+                    <td class="tl">{{serv["placa"]}}</td>
+                    <td class="tl">{{serv["fabricante"]}}</td>
+                    <td class="tl">{{serv["modelo"]}}</td>
+                    <td class="tl">{{serv["total"]}}</td>
+                    <td class="tc"> <a href="{{ url_for('servico_visualizar', id=serv['id'])}}" class="btn-abrir">abrir</a> </td>
                 </tr>
         
                 {% endfor %}

@@ -78,6 +78,27 @@ class Servico(database.Model):
     d_retirada = Column(DateTime)
     mao_de_obra = database.relationship('Maodeobra', backref='os', lazy=True)
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "os": self.os,
+            "status": self.status,
+            "nome_cliente": self.cliente.nome_cliente,
+            "telefone": self.cliente.telefone,
+            "celular": self.cliente.celular,
+            "email": self.cliente.email,
+            "cpf": self.cliente.cpf,
+            "placa": self.veiculo.placa,
+            "fabricante": self.veiculo.fabricante,
+            "modelo": self.veiculo.modelo,
+            "ano": self.veiculo.ano,
+            "cor": self.veiculo.cor,
+            "chassi": self.veiculo.chassi,
+            "potencia": self.veiculo.potencia,
+            "cilindrada": self.veiculo.cilindrada,
+            "total": self.retur_total()
+        }
+
     def retur_total(self):
         tot = 0
         return f'R$ {tot:.2f}'

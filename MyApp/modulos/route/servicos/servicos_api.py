@@ -1,21 +1,27 @@
-from MyApp import app
-from flask import jsonify
+
+
+from MyApp import app, database, filtros
+from flask import jsonify, request
+import json
 import requests
 from bs4 import BeautifulSoup
 from MyApp.models import *
 from sqlalchemy import or_
 
+
+
 @app.route('/api/return_dados_veiculo/<placa>', methods=["GET"])
 def returDataVeiculo(placa):
 
     # URL da página que você quer acessar
-    url = f'https://www.keplaca.com/placa?placa-fipe={placa}'
+    url = f'https://www.keplaca.com/placa?placa-fipe=nvs5d69#google_vignette'
 
     # Fazendo uma requisição GET para a página
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, ilike Gecko) Chrome/92.0.4515.159 Safari/537.36'
     }
-    response = requests.get(url, headers=headers)
+    response = requests.get(url)
+    print(response)
  
     # Verificando se a requisição foi bem-sucedida
     if response.status_code == 200:
@@ -26,6 +32,7 @@ def returDataVeiculo(placa):
         # Exemplo de como pegar um elemento específico pelo ID
         elemento = soup.find(class_='fipeTablePriceDetail')  # Substitua 'meuID' pelo ID que deseja buscar
         dd = dict()
+        print(dd)
         if elemento:
             for c in elemento:
                 dd[c.find('b').text[:-1].replace(' ', '')] = c.find_all('td')[1].text
@@ -42,29 +49,29 @@ def returDataVeiculo(placa):
             return {'status': None}
 
     else:
+        print("erros")
         return {'status': None}
-
 
 @app.route('/api/list_veiculo/<term>', methods=['GET'])
 def listVeiculo(term):
     try:
         clientes_com_veiculos = Cliente.query.join(Cliente.veiculos).filter(
             or_(
-                Cliente.nome_cliente.like(f'%{term}%'),
-                Cliente.telefone.like(f'%{term}%'),
-                Cliente.celular.like(f'%{term}%'),
-                Cliente.email.like(f'%{term}%'),
-                Cliente.cpf.like(f'%{term}%'),
-                Veiculo.placa.like(f'%{term}%'),
-                Veiculo.fabricante.like(f'%{term}%'),
-                Veiculo.modelo.like(f'%{term}%'),
-                Veiculo.ano.like(f'%{term}%'),
-                Veiculo.cor.like(f'%{term}%'),
-                Veiculo.chassi.like(f'%{term}%'),
-                Veiculo.motor.like(f'%{term}%'),
-                Veiculo.combustivel.like(f'%{term}%'),
-                Veiculo.uf.like(f'%{term}%'),
-                Veiculo.municipio.like(f'%{term}%')
+                Cliente.nome_cliente.ilike(f'%{term}%'),
+                Cliente.telefone.ilike(f'%{term}%'),
+                Cliente.celular.ilike(f'%{term}%'),
+                Cliente.email.ilike(f'%{term}%'),
+                Cliente.cpf.ilike(f'%{term}%'),
+                Veiculo.placa.ilike(f'%{term}%'),
+                Veiculo.fabricante.ilike(f'%{term}%'),
+                Veiculo.modelo.ilike(f'%{term}%'),
+                Veiculo.ano.ilike(f'%{term}%'),
+                Veiculo.cor.ilike(f'%{term}%'),
+                Veiculo.chassi.ilike(f'%{term}%'),
+                Veiculo.motor.ilike(f'%{term}%'),
+                Veiculo.combustivel.ilike(f'%{term}%'),
+                Veiculo.uf.ilike(f'%{term}%'),
+                Veiculo.municipio.ilike(f'%{term}%')
             )
         ).all()
 
@@ -115,26 +122,92 @@ def listVeiculo(term):
     except:
         return jsonify([])
 
+@app.route('/api/buscar_servicos/<term>&<filtro>', methods=['GET'])
+def BuscarServicos(term, filtro):
+    servicos = []
+    
+    if filtro == 'all':
+        Servicos = database.session.query(Servico).join(Cliente).join(Veiculo, isouter=True).filter(
+            or_(
+                Cliente.nome_cliente.ilike(f'%{term}%'),
+                Cliente.telefone.ilike(f'%{term}%'),
+                Cliente.celular.ilike(f'%{term}%'),
+                Cliente.email.ilike(f'%{term}%'),
+                Cliente.cpf.ilike(f'%{term}%'),
+                Cliente.cep.ilike(f'%{term}%'),
+                Cliente.estado.ilike(f'%{term}%'),
+                Cliente.cidade.ilike(f'%{term}%'),
+                Cliente.bairro.ilike(f'%{term}%'),
+                Cliente.rua.ilike(f'%{term}%'),
+                Cliente.numero.ilike(f'%{term}%'),
+                Cliente.complemento.ilike(f'%{term}%'),
 
+                Veiculo.placa.ilike(f'%{term}%'),
+                Veiculo.fabricante.ilike(f'%{term}%'),
+                Veiculo.modelo.ilike(f'%{term}%'),
+                Veiculo.ano.ilike(f'%{term}%'),
+                Veiculo.anomodelo.ilike(f'%{term}%'),
+                Veiculo.cor.ilike(f'%{term}%'),
+                Veiculo.importado.ilike(f'%{term}%'),
+                Veiculo.chassi.ilike(f'%{term}%'),
+                Veiculo.motor.ilike(f'%{term}%'),
+                Veiculo.potencia.ilike(f'%{term}%'),
+                Veiculo.cilindrada.ilike(f'%{term}%'),
+                Veiculo.combustivel.ilike(f'%{term}%'),
+                Veiculo.passageiros.ilike(f'%{term}%'),
+                Veiculo.uf.ilike(f'%{term}%'),
+                Veiculo.municipio.ilike(f'%{term}%'),
+            )
+        ).all()
+        
+        servicos = [serv.to_dict() for serv in Servicos]
+
+    else:
+        filtro_cliente = getattr(Cliente, filtro, None)
+        filtro_veiculo = getattr(Veiculo, filtro, None)
+        filtro_servico = getattr(Servico, filtro, None)
+        
+        if filtro_cliente:
+            n = Cliente.query.filter(filtro_cliente.ilike(f'%{term}%')).all()
+            for cli in n:
+                for serv in cli.servicos:
+                    servicos.append(serv.to_dict())
+        
+        elif filtro_veiculo:
+            n = Cliente.query.filter(filtro_veiculo.ilike(f'%{term}%')).all()
+            for vei in n:
+                for serv in vei.servicos:
+                    servicos.append(serv.to_dict())
+        
+        else:
+            n = Servico.query.filter(filtro_servico.ilike(f'%{term}%')).all()
+            for serv in n:
+                servicos.append(serv.to_dict())
+    
+    print(servicos)
+                
+    return jsonify(servicos)
+    
 @app.route('/api/list_cliente/<term>', methods=['GET'])
 def listCliente(term):
+
     # Busca os clientes que correspondem ao termo de busca
     
     try:
         clientes_encontrados = Cliente.query.filter(
             or_(
-                Cliente.nome_cliente.like(f'%{term}%'),
-                Cliente.telefone.like(f'%{term}%'),
-                Cliente.celular.like(f'%{term}%'),
-                Cliente.email.like(f'%{term}%'),
-                Cliente.cpf.like(f'%{term}%'),
-                Cliente.cep.like(f'%{term}%'),
-                Cliente.estado.like(f'%{term}%'),
-                Cliente.cidade.like(f'%{term}%'),
-                Cliente.bairro.like(f'%{term}%'),
-                Cliente.rua.like(f'%{term}%'),
-                Cliente.numero.like(f'%{term}%'),
-                Cliente.complemento.like(f'%{term}%'),
+                Cliente.nome_cliente.ilike(f'%{term}%'),
+                Cliente.telefone.ilike(f'%{term}%'),
+                Cliente.celular.ilike(f'%{term}%'),
+                Cliente.email.ilike(f'%{term}%'),
+                Cliente.cpf.ilike(f'%{term}%'),
+                Cliente.cep.ilike(f'%{term}%'),
+                Cliente.estado.ilike(f'%{term}%'),
+                Cliente.cidade.ilike(f'%{term}%'),
+                Cliente.bairro.ilike(f'%{term}%'),
+                Cliente.rua.ilike(f'%{term}%'),
+                Cliente.numero.ilike(f'%{term}%'),
+                Cliente.complemento.ilike(f'%{term}%'),
             )
         ).all()
 
@@ -162,3 +235,23 @@ def listCliente(term):
         return jsonify(resultado_clientes)
     except:
         return jsonify([])
+
+@app.route('/servicos/api/attserv', methods=['POST'])
+def att_serv():
+    data = request.get_json()
+
+    return json.dumps({})
+
+@app.route('/servicos/api/status', methods=['POST'])
+def att_status():
+
+    data = request.get_json()
+
+    serv = Servico.query.filter_by(id=data['id']).first()
+    if serv:
+        serv.status = int(data['status'])
+        database.session.commit()
+        data = {'status': 'ok'}
+        return data
+
+    return {'status': 'Serviço não encontrado!'}

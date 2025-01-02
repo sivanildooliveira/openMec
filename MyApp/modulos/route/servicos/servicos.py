@@ -2,9 +2,12 @@ from flask import render_template, url_for, request, redirect
 from MyApp import app, database, informacoes
 from MyApp.models import *
 from MyApp.form import FormOs
+from MyApp.modulos.route.servicos.servicos_api import *
 from MyApp.defs_aux import *
+
 import json
 from random import randint
+
 
 
 @app.route('/')
@@ -19,53 +22,30 @@ def servicos_visao():
 @app.route('/servicos/novidades')
 def servicos_novidades():
     informacoes['menu'] = 'novidades'
-    lista = Servico.query.all()
+    lista = Servico.query.all() #falta filtrar somente serviços ativos!
 
-    return render_template('modulos/servicos/novidades.html', informacoes=informacoes, lista=lista)
+    return render_template('modulos/servicos/novidades.html', informacoes=informacoes, lista=lista, qtd=len(lista))
 
 
 @app.route('/servicos/buscar', methods=['GET', 'POST'])
 def servicos_buscar():
     informacoes['menu'] = 'buscar'
-    servicos = Servico.query.all()
+
+    data = []
     
-    termo = ''
-    filtro = 'all'
+    
     if request.method == 'POST':
         termo = request.form.get('inputBuscar')
         filtro = request.form.get('filter')
-
-    data = []
-    sep = []
-    cont = 0
-    for s in servicos:
-        add = False
-        for k, very in s.__dict__.items():
-            if filtro == 'all':
-                add = True
-            else:
-                if k == filtro:
-                    try:
-                        if termo.upper() in very.upper():
-                            
-                            
-                            break
-                    except:
-                        pass
-            print(add)
-        if add:
-            if cont >= 10:
-                cont = 0
-                sep.append(s)
-                data.append(sep)
-                sep = []
-            else:
-                sep.append(s)
-                cont += 1
-        data.append(sep)
+        data = requests.get(url_for("BuscarServicos", term=termo, filtro=filtro, _external=True)).json()
+        print(data)
+        return render_template('modulos/servicos/buscar.html', informacoes=informacoes, servicos=data, termo=termo, filtro=filtro)
+    
+    else:
+        data = [serv.to_dict() for serv in Servico.query.all()]
 
         
-    return render_template('modulos/servicos/buscar.html', informacoes=informacoes, servicos=data, termo=termo, filtro=filtro)
+    return render_template('modulos/servicos/buscar.html', informacoes=informacoes, servicos=data, termo='', filtro='all')
 
 
 @app.route('/servicos/<id>')
@@ -158,24 +138,4 @@ def servicos_criar():
     return render_template('modulos/servicos/criar.html', informacoes=informacoes, form=form, data_hora=data_hora)
 
 
-@app.route('/servicos/api/attserv', methods=['POST'])
-def att_serv():
-    data = request.get_json()
-
-    return json.dumps({})
-
-
-@app.route('/servicos/api/status', methods=['POST'])
-def att_status():
-
-    data = request.get_json()
-
-    serv = Servico.query.filter_by(id=data['id']).first()
-    if serv:
-        serv.status = int(data['status'])
-        database.session.commit()
-        data = {'status': 'ok'}
-        return data
-
-    return {'status': 'Serviço não encontrado!'}
 

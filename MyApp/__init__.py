@@ -14,14 +14,13 @@ database.init_app(app)
 migrate = Migrate(app, database)
 
 
+filtros = [x.split('-') for x in 'all-Todos os Campos-all,os-Nª Serviço-Cliente,nome_cliente-Nome Cliente-Cliente,telefone-Telefone Cliente-Cliente,celular-Celular Cliente-Cliente,email-Email Cliente-Cliente,cpf-CPF Cliente-Cliente,cep-CEP Cliente-Cliente,estado-Estado Cliente-Cliente,cidade-Cidade Cliente-Cliente,bairro-Bairro Cliente-Cliente,rua-Rua Cliente-Cliente,numero-Numero Cliente-Cliente,complemento-Complemento Cliente-Cliente,placa-Placa Veiculo-Veiculo,fabricante-Fabricante Veiculo-Veiculo,modelo-Modelo Veiculo-Veiculo,ano-Ano Fabricação Veiculo-Veiculo,anomodelo-Ano Modelo Veiculo-Veiculo,cor-Cor Veiculo-Veiculo,chassi-Chassi Veiculo-Veiculo,motor-Motor Veiculo-Veiculo,potencia-Potencia Veiculo-Veiculo,cilindrada-Cilindrada Veiculo-Veiculo,combustivel-Combustivel Veiculo-Veiculo,uf-UF Veiculo-Veiculo,municipio-Municipio Veiculo-Veiculo,d_entrada-Data de Entrada,d_autorizacao-Data de Autorização,d_finalizacao-Data de Finalização,d_retirada-Data de Retirada'.split(',')]
 
-
-filtros = 'os-Nª Serviço,nome_cliente-Nome Cliente,telefone-Telefone Cliente,celular-Celular Cliente,email-Email Cliente,cpf-CPF Cliente,cep-CEP Cliente,estado-Estado Cliente,cidade-Cidade Cliente,bairro-Bairro Cliente,rua-Rua Cliente,numero-Numero Cliente,complemento-Complemento Cliente,placa-Placa Veiculo,fabricante-Fabricante Veiculo,modelo-Modelo Veiculo,ano-Ano Fabricação Veiculo,anomodelo-Ano Modelo Veiculo,cor-Cor Veiculo,chassi-Chassi Veiculo,motor-Motor Veiculo,potencia-Potencia Veiculo,cilindrada-Cilindrada Veiculo,combustivel-Combustivel Veiulo,uf-UF Veiculo,municipio-Municipio Veiculo,d_entrada-Data de Entrada,d_autorizacao-Data de Autorização,d_finalizacao-Data de Finalização,d_retirada-Data de Retirada'.split(',')
 informacoes = {
     'modulo': None,
     'menu': None,
     'id_os': None,
-    'filtros_db': [(key.split('-')[0], key.split('-')[1]) for  key in filtros]
+    'filtros_db': filtros
 }
 
 

@@ -13,6 +13,7 @@
 {% block main %}
 
 
+<!-- atualiza infomação do status -->
 <script>
     var requestStatus = (std)=>{
         var idFor = std.getAttribute('idFor')
@@ -50,7 +51,7 @@
 
 <section>
     <div class="titulo">
-        <h1>Serviços <small>existem <span id="qtdTituloSuperior">40</span> serviços</small></h1>
+        <h1>Serviços <small>existem <span id="qtdTituloSuperior">{{ qtd }}</span> serviços ativos</small></h1>
         <div>
             <small>Filtro</small>
             <input type="text" autofocus onkeyup="filtro(this)">
@@ -133,30 +134,42 @@
             </tbody>
         </table>
     </article>
+
+    <!-- adicionar mensagem caso não tenha serviço-->
     <script>
         var verificarQtd = ()=>{
             let ativos = document.querySelectorAll('#ativos tbody tr')
             let finalizados = document.querySelectorAll('#finalizados tbody tr')
-            let divMensagem = document.createElement('div')
             let mensagem = document.createElement('span')
+            let divMensagem = document.createElement('div')
+            divMensagem.classList.add('mensage-vazio')
             divMensagem.className = 'mensagem'
-            mensagem.textContent = 'Não existe serviços a exibir'
+            mensagem.textContent = 'Sem serviços a exibir'
             divMensagem.appendChild(mensagem)
-            console.log(ativos)
+            
             if(ativos.length == 0){
+                alert("at")
                 document.querySelector('#ativos').appendChild(divMensagem)
-            }
+            }else{
+                if(document.querySelector('#ativos').querySelector(".mensage-vazio")){
+                    document.querySelector('#ativos').removeChild(divMensagem)
+                }
+            };
+
             if(finalizados.length == 0){
                 document.querySelector('#finalizados').appendChild(divMensagem)
+            }else{
+                if(document.querySelector('#finalizados').querySelector(".mensage-vazio")){
+                    document.querySelector('#finalizados').removeChild(divMensagem)
+                }
             }
         }
         verificarQtd()
     </script>
 </section>
 
+    <!-- Buca Superior -->
 <script>
-    document.getElementById('qtdTituloSuperior').innerHTML = document.querySelectorAll('.table-servico').length
-
     var filtro = (inp)=>{
         const filt = inp.value.toUpperCase();
         document.querySelectorAll('.table-servico').forEach((serv)=>{
@@ -171,7 +184,6 @@
         })
         verificarQtd()
     }
-
 </script>
 
 {% endblock %}
