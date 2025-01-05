@@ -3,14 +3,13 @@
 
 
 <style>
-    .container {
-        width: 100%;
+    .container-status {
         padding-top: 20px;
         padding-bottom: 29px;
+        margin-bottom: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        
     }
 
     .step {
@@ -65,7 +64,7 @@
 
     .line {
         z-index: 10;
-        width: 70px;
+        width: 110px;
         height: 8px;
         background-color: lightgreen;
         
@@ -74,49 +73,58 @@
     .label {
         position: absolute;
         top: 94%;
-        font-size: 13px;
+        width: 125px;
+        font-size: 11px;
         text-align: center;
         margin-top: 5px;
         padding: 2px 5px;
-        background-color: white;
+        background-color: transparent;
         border: 1px solid rgba(0, 0, 0, 0.199);
         border-radius: 7px;
-        white-space: nowrap;
         color: rgba(0, 0, 0, 0.705);
     }
 </style>
 
 
-<div class="container">
+<section class="container-status">
     <div class="step">
         <strong>Entrada</strong>
         <div class="circle completed">
             <span>✓</span>
         </div>
-        <div class="label">10/12/2024</div>
+        {% if serv.d_entrada %}<input class="label" type="datetime-local" name="" id="" value="{{ serv.return_data_hora(1) }}">
+        {% else %}<div class="label">-- / -- / ----      -- : --</div>
+        {% endif %}
     </div>
     <div class="line"></div>
     <div class="step">
         <strong>Autorizado</strong>
-        <div class="circle completed">
+        <div class="circle {% if serv.status >= 2 %}completed{% endif %}">
             <span>✓</span>
         </div>
-        <div class="label">10/12/2024</div>
+        {% if serv.d_autorizacao %}<input class="label" type="datetime-local" name="" id="" value="{{ serv.return_data_hora(2) }}">
+        {% else %}<div class="label">-- / -- / ----      -- : --</div>
+        {% endif %}
+        
     </div>
     <div class="line"></div>
     <div class="step">
         <strong>Finalizado</strong>
-        <div class="circle">
+        <div class="circle {% if serv.status >= 3 %}completed{% endif %}">
             <span>✓</span>
         </div>
-        <div class="label">-- /-- /----</div>
+        {% if serv.d_finalizacao %}<input class="label" type="datetime-local" name="" id="" value="{{ serv.return_data_hora(3) }}">
+        {% else %}<div class="label">-- / -- / ----      -- : --</div>
+        {% endif %}
     </div>
     <div class="line"></div>
     <div class="step">
         <strong>Retirado</strong>
-        <div class="circle">
+        <div class="circle {% if serv.status >= 4 %}completed{% endif %}">
             <span>✓</span>
         </div>
-        <div class="label">-- /-- /----</div>
+        {% if serv.d_retirada %}<input class="label" type="datetime-local" name="" id="" value="{{ serv.return_data_hora(4) }}">
+        {% else %}<div class="label">-- / -- / ----      -- : --</div>
+        {% endif %}
     </div>
-</div>
+</section>

@@ -244,12 +244,31 @@ def att_serv():
 
 @app.route('/servicos/api/status', methods=['POST'])
 def att_status():
-
     data = request.get_json()
-
     serv = Servico.query.filter_by(id=data['id']).first()
     if serv:
-        serv.status = int(data['status'])
+        stt = int(data['status'])
+        serv.status = stt
+        if stt == 1:
+            serv.d_autorizacao = None
+            serv.d_finalizacao = None
+            serv.d_retirada = None
+        if stt == 2:
+            serv.d_autorizacao = datetime.utcnow()
+            serv.d_finalizacao = None
+            serv.d_retirada = None
+        elif stt == 3:
+            if serv.d_autorizacao == None:
+                serv.d_autorizacao = datetime.utcnow()
+            serv.d_finalizacao = datetime.utcnow()
+            serv.d_retirada = None
+        elif stt == 4:
+            if serv.d_autorizacao == None:
+                serv.d_autorizacao = datetime.utcnow()
+            if serv.d_finalizacao == None:
+                serv.d_finalizacao = datetime.utcnow()
+            serv.d_retirada = datetime.utcnow()
+
         database.session.commit()
         data = {'status': 'ok'}
         return data

@@ -32,3 +32,10 @@ main > section {
     padding: 15px !important;
 }
 
+footer {
+    color: rgb(61, 61, 61);
+    position: relative;
+    display: block;
+    padding-left: 78px;
+}
+

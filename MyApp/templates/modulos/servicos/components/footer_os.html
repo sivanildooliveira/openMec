@@ -1,18 +1,57 @@
 <style>
-    footer {
-        position: sticky;
-        bottom: 0px;
-        padding: 20px;
-        padding-left: 80px;
+    .div-footer {
+        position: relative;
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        width: 100%;
+        align-items: center;
+        width: calc(100% - 18px);
+        height: 65px;
+        padding-inline:5px 10px;
         background-color: white;
-        box-shadow: -1px -1px 3px rgba(0, 0, 0, 0.274);
+    }
+    .button {
+        padding: 10px 20px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .edit {
+        background-color: #00bcd4;
+    }
+
+    .view {
+        display: flex;
+        width: 70%;
+        height: 67%;
+        background-color: #f1f1f1;
+        color: black;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .inativar {
+        background-color: #F39C12;
+    }
+
+    .delete {
+        background-color: #f44336;
     }
 </style>
-<footer>
-    <button id="btnSalvar">salvar</button>
-    <button>excluir</button>
-</footer>
+
+<section class="div-footer">
+    <button class="button edit">Editar</button>
+
+    <div class="view">
+        Total = R$00,00 = R$00,00 + R$00,00
+    </div>
+
+    
+    <div>
+        <button class="button inativar">Inativar</button>
+        <button class="button delete">Excluir</button>
+    </div>
+</section>

@@ -114,15 +114,11 @@
                     {% if i.status >= 3 %}
                         <tr class="table-servico active">
                             <td class="tc pec" style="width: 5%;"><strong><i class="bi bi-arrow-down-circle-fill"></i> {{i.os}}</strong></td>
-                            <td class="tl wl" style="width: 45%;"><strong>{{ i.cliente }}</strong> <br> {{ i.fabricante }}  {{ i.modelo }}</td>
+                            <td class="tl wl"style="width: 45%;"><strong>{{ i.cliente.nome_cliente }}</strong> <br> {{ i.veiculo.fabricante }} - {{ i.veiculo.modelo }} - {{ i.veiculo.ano }}/{{ i.veiculo.anomodelo }} - {{ i.veiculo.cor }}</td>
                             <td class="tl" style="width: 15%;">(62) 99405-3879</td>
                             <td class="tl" style="width: 10%; font-size: .9rem; text-wrap: nowrap;">{{ i.data_formatada() }} <br> sem previsão</td>
                             <td class="tc status" style="width: 100%;">
-                                <i class="bi bi-circle-fill {{ 'ck' if i.status >= 1 else ''}}" idFor="{{ i.id }}" valor=1 onclick="requestStatus(this)"></i>
-                                <i class="bi bi-circle-fill {{ 'ck' if i.status  >= 2 else ''}}" idFor="{{ i.id }}" valor=2 onclick="requestStatus(this)"></i>
-                                <i class="bi bi-circle-fill {{ 'ck' if i.status  >= 3 else ''}}" idFor="{{ i.id }}" valor=3 onclick="requestStatus(this)"></i>
-                                <i class="bi bi-circle-fill {{ 'ck' if i.status  == 4 else ''}}" idFor="{{ i.id }}" valor=4 onclick="requestStatus(this)"></i>
-                                <i class="bi bi-currency-dollar" style="font-size: 20px; margin-left: -3px; font-weight: 800;"></i>
+                                {% include 'modulos/servicos/components/status.html' %}
                             </td>
                             <td class="tc" style="width: 10%;"><a href="{{ url_for('servico_visualizar', id=i.id) }}" class="btn-abrir">Abrir</a></td>
                         </tr>
@@ -139,13 +135,12 @@
             let finalizados = document.querySelectorAll('#finalizados tbody tr')
             let mensagem = document.createElement('span')
             let divMensagem = document.createElement('div')
-            divMensagem.classList.add('mensage-vazio')
             divMensagem.className = 'mensagem'
+            divMensagem.classList.add('mensage-vazio')
             mensagem.textContent = 'Sem serviços a exibir'
             divMensagem.appendChild(mensagem)
             
-            if(ativos.length == 0){
-                alert("at")
+            if(ativos.length == 0 && document.querySelector('#ativos').querySelector('.mensage-vazio') == null){
                 document.querySelector('#ativos').appendChild(divMensagem)
             }else{
                 if(document.querySelector('#ativos').querySelector(".mensage-vazio")){
@@ -153,7 +148,7 @@
                 }
             };
 
-            if(finalizados.length == 0){
+            if(finalizados.length == 0 && document.querySelector('#finalizados').querySelector('.mensage-vazio') == null){
                 document.querySelector('#finalizados').appendChild(divMensagem)
             }else{
                 if(document.querySelector('#finalizados').querySelector(".mensage-vazio")){
