@@ -72,19 +72,16 @@
                 </tr>
             </thead>
             <tbody>
+                
                 {% for i in lista %}
                     {% if i.status < 3 %}
                     <tr class="table-servico active">
                         <td class="tc pec"style="width: 5%;"><small><i class="bi bi-arrow-down-circle-fill"></i> {{i.os}}</small></td>
-                        <td class="tl wl"style="width: 45%;"><strong>{{ i.cliente.nome_cliente }}</strong> <br> {{ i.fabricante }}  {{ i.modelo }}</td>
+                        <td class="tl wl"style="width: 45%;"><strong>{{ i.cliente.nome_cliente }}</strong> <br> {{ i.veiculo.fabricante }} - {{ i.veiculo.modelo }} - {{ i.veiculo.ano }}/{{ i.veiculo.anomodelo }} - {{ i.veiculo.cor }}</td>
                         <td class="tl"style="width: 15%;">{{ i.cliente.celular }}</td>
                         <td class="tl" style=" width: 10%; font-size: .9rem; text-wrap: nowrap;">{{ i.data_formatada() }}</td>
                         <td class="tc status"style="width: 100%;">
-                            <i class="bi bi-circle-fill {{ 'ck' if i.status >= 1 else ''}}" idFor="{{ i.id }}" valor=1 onclick="requestStatus(this)"></i>
-                            <i class="bi bi-circle-fill {{ 'ck' if i.status  >= 2 else ''}}" idFor="{{ i.id }}" valor=2 onclick="requestStatus(this)"></i>
-                            <i class="bi bi-circle-fill {{ 'ck' if i.status  >= 3 else ''}}" idFor="{{ i.id }}" valor=3 onclick="requestStatus(this)"></i>
-                            <i class="bi bi-circle-fill {{ 'ck' if i.status  == 4 else ''}}" idFor="{{ i.id }}" valor=4 onclick="requestStatus(this)"></i>
-                            <i class="bi bi-currency-dollar" style="font-size: 20px; margin-left: -3px; font-weight: 800;"></i>
+                            {% include 'modulos/servicos/components/status.html' %}
                         </td>
                         <td class="tc"style="width: 10%;"><a href="{{ url_for('servico_visualizar', id=i.id) }}" class="btn-abrir">Abrir</a></td>
                     </tr>

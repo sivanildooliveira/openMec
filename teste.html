@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processo de Etapas</title>
+    <style>
+        .container {
+            width: 100%;
+            padding-top: 15px;
+            padding-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+
+        .step {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: -2px;
+            margin-right: -2px;
+            
+        }
+
+        .step strong{
+            position: absolute;
+            top: -12px;
+            font-weight: bolder;
+            font-size: 9px;
+            color: rgba(0, 0, 0, 0.596);
+
+        }
+
+        .circle {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: white;
+            border: 2px solid lightgreen;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.171);
+            cursor: pointer;
+        }
+
+        .circle span{
+            display: none;
+            font-weight: bolder;
+            color: white;
+            font-size: larger;
+            text-shadow: 0px 0px 5px white;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.295);
+        }
+
+        .circle.completed {
+            background-color: lightgreen;
+        }
+
+        .circle.completed span{
+            display: block;
+            background-color: lightgreen;
+        }
+
+        .line {
+            z-index: 10;
+            width: 50px;
+            height: 8px;
+            background-color: lightgreen;
+            
+        }
+
+        .label {
+            position: absolute;
+            top: 94%;
+            font-size: 10px;
+            text-align: center;
+            margin-top: 5px;
+            padding: 3px 5px;
+            background-color: white;
+            border: 1px solid rgba(0, 0, 0, 0.199);
+            border-radius: 7px;
+            white-space: nowrap;
+            color: rgba(0, 0, 0, 0.705);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="step">
+            <strong>Entrada</strong>
+            <div class="circle completed">
+                <span>✓</span>
+            </div>
+            <div class="label">10/12/2024</div>
+        </div>
+        <div class="line"></div>
+        <div class="step">
+            <strong>Autorizado</strong>
+            <div class="circle completed">
+                <span>✓</span>
+            </div>
+            <div class="label">10/12/2024</div>
+        </div>
+        <div class="line"></div>
+        <div class="step">
+            <strong>Finalizado</strong>
+            <div class="circle">
+                <span>✓</span>
+            </div>
+            <div class="label">-- /-- /----</div>
+        </div>
+        <div class="line"></div>
+        <div class="step">
+            <strong>Retirado</strong>
+            <div class="circle">
+                <span>✓</span>
+            </div>
+            <div class="label">-- /-- /----</div>
+        </div>
+    </div>
+</body>
+</html>

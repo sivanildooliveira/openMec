@@ -1,56 +1,125 @@
 
 
 
-    <script>
-        attStatus = ()=>{
-            document.querySelectorAll('#status input[type=checkbox]').forEach((cbx, i)=>{
+<!--<script>
+    attStatus = ()=>{
+        document.querySelectorAll('#status input[type=checkbox]').forEach((cbx, i)=>{
+            cbx.setAttribute('checked')
+            if(i+1 <= servStatus){
                 cbx.setAttribute('checked')
-                if(i+1 <= servStatus){
-                    cbx.setAttribute('checked')
-                } 
+            } 
+        })
+    }
+    
+    attStatus()
+
+    var requestStatus = (std)=>{
+        var idFor = std.getAttribute('idFor')
+        var valor = std.getAttribute('valor')
+
+        var data = {'status': valor, 'id': idFor}
+        var url1 = "{{ url_for('att_status') }}"
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+
+        fetch(url1, options)
+            .then(response => response.json())
+            .then(data => {
+                if(data['status'] == 'ok'){
+                    alert("status atualizado!")
+                    servStatus = valor
+                    attStatus()
+                }else{
+                    alert(data['status'])
+                }
             })
-        }
-        attStatus()
+            .catch(error => {
+                alert(error)
+                return error
+            });
 
-        var requestStatus = (std)=>{
-            var idFor = std.getAttribute('idFor')
-            var valor = std.getAttribute('valor')
+    }
     
-            var data = {'status': valor, 'id': idFor}
-            var url1 = "{{ url_for('att_status') }}"
-    
-            const options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            };
-    
-            fetch(url1, options)
-                .then(response => response.json())
-                .then(data => {
-                    if(data['status'] == 'ok'){
-                        alert("status atualizado!")
-                        servStatus = valor
-                        attStatus()
-                    }else{
-                        alert(data['status'])
-                    }
-                })
-                .catch(error => {
-                    alert(error)
-                    return error
-                });
-    
-        }
-        
-    </script>
+</script>-->
 
+<style>
+    .progress-bar-status {
+        display: flex;
+        align-items: center;
+    }
+    .step {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #fff;
+        border: 3px solid #90EE90;
+        margin: 0 5px;
+        position: relative;
+        cursor: pointer;
+    }
+    .step.active {
+        background-color: #32CD32;
+    }
+    .step:not(:last-child)::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        width: 30px;
+        height: 4px;
+        background-color: #90EE90;
+        transform: translateY(-50%);
+    }
+</style>
 
+<script>
+    var att_status = (element)=>{
+        let id = element.parentElement.getAttribute('idos')
+        let stt = element.getAttribute('number')
+        element.classList.toggle('active')
+        var data = {'status': stt, 'id': id}
+        var url1 = "{{ url_for('att_status') }}"
 
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
 
-<article id="status">
+        fetch(url1, options)
+            .then(response => response.json())
+            .then(data => {
+                if(data['status'] == 'ok'){
+                    alert("status atualizado!")
+                    servStatus = valor
+                    attStatus()
+                }else{
+                    alert(data['status'])
+                }
+            })
+            .catch(error => {
+                alert(error)
+                return error
+            });
+    }
+</script>
+
+<div class="progress-bar-status" idos="{{ i.id }}">
+    <div onclick="att_status(this)" number=1 class="step {% if i.status >= 1 %}active{% endif %}"></div>
+    <div onclick="att_status(this)" number=2 class="step {% if i.status >= 2 %}active{% endif %}"></div>
+    <div onclick="att_status(this)" number=3 class="step {% if i.status >= 3 %}active{% endif %}"></div>
+    <div onclick="att_status(this)" number=4 class="step {% if i.status >= 4 %}active{% endif %}"></div>
+</div>
+
+<!--<article id="status">
     <ul>
         <li>
             <label for="entrada">Entrada</label>
@@ -78,5 +147,5 @@
         </li>
     </ul>
      
-</article>
+</article>-->
 

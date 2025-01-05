@@ -93,7 +93,7 @@ table tbody tr:hover {
 table td {
     font-size: .9rem;
     text-wrap: nowrap;
-    padding: 0px 15px;
+    padding: 5px 15px;
 }
 
 table td strong {
